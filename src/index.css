@@ -1,0 +1,54 @@
+@import "tailwindcss";
+@import url('https://fonts.googleapis.com/css2?family=Anton&family=Archivo:ital,wght@0,400;0,500;0,600;0,700;0,800;1,700&family=JetBrains+Mono:wght@400;600&display=swap');
+
+@theme {
+  --color-ink: #0a0a0a;
+  --color-charcoal: #121212;
+  --color-panel: #1a1a1a;
+  --color-panel-line: #2a2a2a;
+  --color-bone: #f4f2ee;
+  --color-fog: #a3a3a0;
+  --color-flare: #ff5a1f;
+  --color-flare-hot: #ff8a3d;
+  --color-marigold: #e0a640;
+  --color-magenta: #e94b8c;
+
+  --font-display: 'Anton', 'Archivo', sans-serif;
+  --font-body: 'Archivo', system-ui, sans-serif;
+  --font-mono: 'JetBrains Mono', monospace;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  background: var(--color-ink);
+  color: var(--color-bone);
+  font-family: var(--font-body);
+  -webkit-font-smoothing: antialiased;
+}
+
+::selection {
+  background: var(--color-flare);
+  color: var(--color-ink);
+}
+
+.text-outline {
+  -webkit-text-stroke: 1.5px var(--color-bone);
+  color: transparent;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+.focus-flare:focus-visible {
+  outline: 2px solid var(--color-flare);
+  outline-offset: 3px;
+}
