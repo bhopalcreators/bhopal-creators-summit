@@ -221,6 +221,20 @@ export const resources = {
     ],
     reorderable: true,
   },
+  'gallery-images': {
+    label: 'Gallery Photos',
+    endpoint: '/gallery-images',
+    resourceKey: 'gallery',
+    columns: [{ key: 'album', label: 'Album' }, { key: 'caption', label: 'Caption' }],
+    fields: [
+      { name: 'album', label: 'Album', type: 'relation', endpoint: '/gallery-albums', labelKey: 'title', required: true },
+      { name: 'media', label: 'Photo (or video)', type: 'media' },
+      { name: 'caption', label: 'Caption', type: 'text' },
+      { name: 'order', label: 'Order', type: 'number' },
+      { name: 'isActive', label: 'Active', type: 'checkbox' },
+    ],
+    reorderable: true,
+  },
   notices: {
     label: 'Notices & Announcements',
     endpoint: '/notices',
@@ -265,6 +279,7 @@ export const resourceOrder = [
   'speakers',
   'faqs',
   'gallery-albums',
+  'gallery-images',
   'notices',
   'blogs',
 ];

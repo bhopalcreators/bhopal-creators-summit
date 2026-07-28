@@ -1,7 +1,9 @@
 import { useState } from 'react';
 import MediaField from './MediaField';
+import RelationField from './RelationField';
 
 function toInputValue(field, raw) {
+  if (field.type === 'relation') return raw ?? (field.multiple ? [] : '');
   if (raw === undefined || raw === null) return field.type === 'checkbox' ? false : '';
   if (field.type === 'date') return String(raw).slice(0, 10);
   if (field.type === 'stringList') return Array.isArray(raw) ? raw.join('\n') : raw;
@@ -9,6 +11,8 @@ function toInputValue(field, raw) {
 }
 
 function fromInputValue(field, raw) {
+  if (field.type === 'relation' && field.multiple) return (raw || []).map((v) => (typeof v === 'string' ? v : v._id));
+  if (field.type === 'relation') return raw ? (typeof raw === 'string' ? raw : raw._id) : null;
   if (field.type === 'number') return raw === '' ? undefined : Number(raw);
   if (field.type === 'stringList') return raw.split('\n').map((s) => s.trim()).filter(Boolean);
   if (field.type === 'checkbox') return Boolean(raw);
@@ -57,6 +61,15 @@ export default function AdminForm({ fields, initialValues = {}, onSubmit, onCanc
               value={values[field.name]}
               onChange={(val) => setField(field.name, val)}
               folder={mediaFolder}
+            />
+          ) : field.type === 'relation' ? (
+            <RelationField
+              label={field.label}
+              endpoint={field.endpoint}
+              labelKey={field.labelKey}
+              multiple={field.multiple}
+              value={values[field.name]}
+              onChange={(val) => setField(field.name, val)}
             />
           ) : field.type === 'checkbox' ? (
             <label className="flex items-center gap-2 text-sm text-bone">

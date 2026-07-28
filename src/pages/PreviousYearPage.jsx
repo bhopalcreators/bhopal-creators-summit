@@ -1,19 +1,30 @@
 import { useEffect, useState } from 'react';
 import { useParams, Link } from 'react-router-dom';
+import { PlayCircle } from 'lucide-react';
 import api from '../lib/api';
 
 export default function PreviousYearPage() {
   const { slug } = useParams();
   const [year, setYear] = useState(null);
+  const [galleryImages, setGalleryImages] = useState([]);
   const [status, setStatus] = useState('loading'); // loading | ready | not-found
 
   useEffect(() => {
     setStatus('loading');
+    setGalleryImages([]);
     api
       .get(`/previous-years/slug/${slug}`)
       .then((res) => {
         setYear(res.item);
         setStatus('ready');
+
+        const albumId = res.item?.galleryAlbum?._id || res.item?.galleryAlbum;
+        if (albumId) {
+          api
+            .get(`/gallery-images?album=${albumId}&limit=50`)
+            .then((imgRes) => setGalleryImages(imgRes.items || []))
+            .catch(() => setGalleryImages([]));
+        }
       })
       .catch(() => setStatus('not-found'));
   }, [slug]);
@@ -77,6 +88,41 @@ export default function PreviousYearPage() {
                   <p className="text-xs uppercase tracking-wide text-fog">{w.awardTitle}</p>
                   <p className="mt-1 font-display text-lg text-bone">{w.winnerName}</p>
                 </div>
+              ))}
+            </div>
+          </Section>
+        )}
+
+        {galleryImages.length > 0 && (
+          <Section title="Photos">
+            <div className="grid grid-cols-2 gap-3 sm:grid-cols-4">
+              {galleryImages.map((img) => (
+                <div key={img._id} className="aspect-square overflow-hidden rounded-lg bg-panel">
+                  <img
+                    src={img.media?.url}
+                    alt={img.caption || img.media?.altText || `${year.year} highlight`}
+                    className="h-full w-full object-cover transition-transform duration-300 hover:scale-105"
+                    loading="lazy"
+                  />
+                </div>
+              ))}
+            </div>
+          </Section>
+        )}
+
+        {year.videos?.length > 0 && (
+          <Section title="Videos">
+            <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+              {year.videos.map((v, i) => (
+                <a
+                  key={i}
+                  href={v.url}
+                  target="_blank"
+                  rel="noreferrer"
+                  className="focus-flare group flex aspect-video items-center justify-center rounded-xl border border-panel-line bg-panel transition-colors hover:border-flare/60"
+                >
+                  <PlayCircle size={34} className="text-fog transition-colors group-hover:text-flare" />
+                </a>
               ))}
             </div>
           </Section>

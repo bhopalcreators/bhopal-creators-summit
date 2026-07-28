@@ -11,6 +11,14 @@ function NavAnchor({ href, className, onClick, children }) {
       </Link>
     );
   }
+  if (href.startsWith('#')) {
+    // Anchor links always need to resolve against the homepage, not whatever page we're currently on.
+    return (
+      <Link to={`/${href}`} className={className} onClick={onClick}>
+        {children}
+      </Link>
+    );
+  }
   return (
     <a href={href} className={className} onClick={onClick}>
       {children}

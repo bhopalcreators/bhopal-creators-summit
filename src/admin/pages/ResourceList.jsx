@@ -231,5 +231,6 @@ export default function ResourceList() {
 function renderCell(value) {
   if (typeof value === 'boolean') return value ? 'Yes' : 'No';
   if (value === undefined || value === null) return '—';
+  if (typeof value === 'object') return value.title || value.name || value.label || value._id || '—';
   return String(value);
 }

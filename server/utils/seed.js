@@ -15,6 +15,9 @@ import Testimonial from '../models/Testimonial.js';
 import AgendaItem from '../models/AgendaItem.js';
 import Ticket from '../models/Ticket.js';
 import FAQ from '../models/FAQ.js';
+import PreviousYear from '../models/PreviousYear.js';
+import GalleryAlbum from '../models/GalleryAlbum.js';
+import GalleryImage from '../models/GalleryImage.js';
 
 async function seed() {
   await connectDB();
@@ -49,6 +52,9 @@ async function seed() {
       venueFullAddress: 'Hotel Pride Kolar, Bhopal',
       contactEmail: 'bhopalcreatorssummit@gmail.com',
       contactPhones: ['+91 91 79 5523 97', '+91-8319527668'],
+      socialLinks: [
+        { platform: 'instagram', url: 'https://www.instagram.com/bhopalcreatorssummit/', isActive: true },
+      ],
       footerAbout:
         "The Bhopal Creators Summit brings India's creative minds together in the heart of Madhya Pradesh. Fueled by digital ambition and cultural roots, it's more than a SUMMIT—it's a MOVEMENT.",
     },
@@ -83,7 +89,7 @@ async function seed() {
 
   // --- Sponsors ---
   await Sponsor.deleteMany({});
-  await Sponsor.insertMany(
+  const sponsorDocs = await Sponsor.insertMany(
     [
       'SAM Global University',
       'Ratnesh Communications',
@@ -100,7 +106,7 @@ async function seed() {
 
   // --- Competitions ---
   await Competition.deleteMany({});
-  await Competition.insertMany([
+  const competitionDocs = await Competition.insertMany([
     {
       title: 'Photography',
       slug: 'photography',
@@ -132,7 +138,7 @@ async function seed() {
 
   // --- Workshops ---
   await Workshop.deleteMany({});
-  await Workshop.insertMany([
+  const workshopDocs = await Workshop.insertMany([
     { title: 'AI Integration in Content', facilitatorName: 'Naman Deshmukh', description: 'Decode the future\u2014how AI can power up your content game.', order: 0 },
     { title: 'Entrepreneurship', facilitatorName: 'Harsh Surana', description: 'From ideas to income\u2014build, brand, and break through.', order: 1 },
     { title: 'Theatre Workshop', description: 'Channel emotion, own the stage\u2014where stories come alive.', order: 2 },
@@ -174,7 +180,7 @@ async function seed() {
 
   // --- Testimonials ---
   await Testimonial.deleteMany({});
-  await Testimonial.insertMany([
+  const testimonialDocs = await Testimonial.insertMany([
     { handle: '@nanukasafar', quote: 'Honoured to receive the Youngest Creator Award.', year: 2024, order: 0 },
     { handle: '@bazarvilleindia', quote: 'This event truly pushed our creative boundaries.', year: 2024, order: 1 },
     { handle: '@techplusgadgets', quote: 'One of the best creator events I\u2019ve ever been part of.', year: 2024, order: 2 },
@@ -221,6 +227,106 @@ async function seed() {
     { title: 'Panel Discussions & Keynote Sessions', timeLabel: '2:30 PM \u2013 4:30 PM', subItems: [], order: 1 },
     { title: 'Awards & Performances', timeLabel: '5:00 PM \u2013 8:00 PM', subItems: [], order: 2 },
     { title: 'Live Music & DJ Night', timeLabel: '8:30 PM \u2013 10:00 PM', subItems: [], order: 3 },
+  ]);
+
+  // --- Previous Years (2023 / 2024 / 2025) + 2024 photo gallery ---
+  // NOTE: exact historical head-counts for 2023 & 2024 weren't available to seed —
+  // update statistics/overview copy for those two from the admin panel (/admin/previous-years)
+  // once the client shares confirmed numbers. 2025 figures below reuse the numbers already
+  // published on the live site (see Stats section above).
+  await PreviousYear.deleteMany({});
+  await GalleryAlbum.deleteMany({});
+  await GalleryImage.deleteMany({});
+
+  const album2024 = await GalleryAlbum.create({
+    title: '2024 Highlights',
+    year: 2024,
+    order: 0,
+    isActive: true,
+  });
+
+  const gallery2024Urls = [
+    'IMG_7440.jpg',
+    'IMG_7441.jpg',
+    'IMG_7442.jpg',
+    'IMG_7443.jpg',
+    'IMG_7444.jpg',
+    'IMG_7445.jpg',
+    'IMG_7447.jpg',
+    'IMG_7450.jpg',
+    'IMG_7454.jpg',
+    'IMG_7460.jpg',
+    'IMG_7461.jpg',
+    'IMG_7462.jpg',
+  ];
+  await GalleryImage.insertMany(
+    gallery2024Urls.map((file, i) => ({
+      album: album2024._id,
+      media: {
+        url: `https://bhopalcreatorssummit.in/wp-content/uploads/2025/08/${file}`,
+        publicId: `previous-years/2024/${file.replace(/\.[^.]+$/, '')}`,
+        type: 'image',
+      },
+      order: i,
+      isActive: true,
+    }))
+  );
+
+  await PreviousYear.insertMany([
+    {
+      year: 2023,
+      slug: '2023',
+      theme: 'Where It All Began',
+      overview:
+        'The very first Bhopal Creators Summit brought together the city\u2019s photographers, editors, and early digital creators for a single day of workshops, conversations, and collaboration \u2014 planting the seed for what would grow into Madhya Pradesh\u2019s largest creator gathering.',
+      achievements: [
+        'Launched the first-ever creator-focused summit in Bhopal',
+        'Brought together the region\u2019s earliest digital creator community',
+        'Set the foundation for the Summit\u2019s annual workshops and awards format',
+      ],
+      highlights: ['The debut edition that started the movement'],
+      isPublished: true,
+    },
+    {
+      year: 2024,
+      slug: '2024',
+      theme: 'The Movement Grows',
+      overview:
+        'Building on the debut edition, the 2024 Summit expanded into a full day of workshops, panel discussions, and the community\u2019s first proper creator awards night \u2014 drawing a bigger, more diverse crowd of photographers, filmmakers, and influencers from across the region.',
+      achievements: [
+        'Introduced the Summit\u2019s first dedicated Creator Awards night',
+        'Expanded to multiple parallel workshop tracks',
+        'Grew the creator community significantly ahead of the 2025 edition',
+      ],
+      highlights: ['Creator Awards Night', 'Panel Discussions with Top Creators', 'Live Performances'],
+      galleryAlbum: album2024._id,
+      testimonials: testimonialDocs.map((t) => t._id),
+      isPublished: true,
+    },
+    {
+      year: 2025,
+      slug: '2025',
+      theme: 'Unite. Create. Celebrate.',
+      overview:
+        'The biggest edition yet \u2014 backed by MP Tourism and bringing together 450+ creators for a full day of competitions, workshops, panel discussions, awards, and a closing DJ night at Hotel Pride Kolar.',
+      statistics: [
+        { label: 'Creators Attended', value: '450+' },
+        { label: 'Overall Reach', value: '20M+' },
+        { label: 'Impressions', value: '1L+' },
+        { label: 'Brand Associations', value: '20+' },
+      ],
+      achievements: [
+        'Onboarded MP Tourism as an official supporting partner',
+        'Largest turnout in the Summit\u2019s history \u2014 450+ creators',
+        'Introduced CollabVerse, the Summit\u2019s first virtual collaboration competition',
+      ],
+      highlights: ['Photography Exhibition', '6 Workshops Across Different Categories', 'Creator Awards Ceremony', 'DJ Night'],
+      workshops: workshopDocs.map((w) => w._id),
+      competitions: competitionDocs.map((c) => c._id),
+      sponsors: sponsorDocs.map((s) => s._id),
+      testimonials: testimonialDocs.map((t) => t._id),
+      isPublished: true,
+    },
   ]);
 
   console.log('Seed complete.');

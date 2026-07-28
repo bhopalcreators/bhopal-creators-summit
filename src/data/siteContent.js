@@ -15,11 +15,18 @@ export const siteSettings = {
   instagramHandle: '@iamabhopalicreator',
 };
 
+// Fallback social links, used until /api/settings returns live data (set from the admin panel).
+export const socialLinksFallback = [
+  { platform: 'instagram', url: 'https://www.instagram.com/bhopalcreatorssummit/', isActive: true },
+];
+
 export const navLinks = [
   { label: 'About Us', href: '/about' },
+  { label: 'Our Journey', href: '#journey' },
   { label: 'Competitions', href: '#competitions' },
   { label: 'Workshops', href: '#workshops' },
   { label: 'Awards', href: '#awards' },
+  { label: '2026', href: '#coming-soon-2026' },
   { label: 'Tickets', href: '#tickets' },
 ];
 
@@ -63,6 +70,50 @@ export const stats = [
   { value: '20+', label: 'Brands Associations' },
   { value: '\u221E', label: 'Networking' },
 ];
+
+// "3 Years of Bhopal Creators Summit" journey section — the big-picture numbers
+// that tell the community-growth story across every edition.
+export const journeyStats = [
+  { value: '3', label: 'Years of the Summit', sub: '2023 \u2013 2025, and counting' },
+  { value: '450+', label: 'Creators Connected', sub: 'Photographers, filmmakers, influencers & more' },
+  { value: '30M+', label: 'Combined Reach', sub: 'Generated across every edition' },
+  { value: '6+', label: 'Workshops Every Edition', sub: 'Hands-on sessions with industry mentors' },
+  { value: '15+', label: 'Award Categories', sub: 'Recognising the region\u2019s best creators' },
+];
+
+// Fallback previous-year cards, shown until /api/previous-years is seeded/published from the admin panel.
+export const previousYearsFallback = [
+  {
+    year: 2023,
+    slug: '2023',
+    theme: 'Where It All Began',
+    summary: 'The founding edition \u2014 the first time Bhopal\u2019s creators, photographers and digital storytellers came together under one roof.',
+    isPublished: false,
+  },
+  {
+    year: 2024,
+    slug: '2024',
+    theme: 'The Movement Grows',
+    summary: 'A bigger stage, more workshops and the community\u2019s first big creator awards night.',
+    isPublished: false,
+  },
+  {
+    year: 2025,
+    slug: '2025',
+    theme: 'Unite. Create. Celebrate.',
+    summary: '450+ creators, MP Tourism on board, and the biggest edition yet \u2014 competitions, workshops, awards and a DJ night to close it out.',
+    isPublished: false,
+  },
+];
+
+export const comingSoon2026 = {
+  eyebrow: 'Bhopal Creators Summit \u2014 2026',
+  title: 'The Next Chapter Is Coming',
+  copy:
+    'Four years of building Madhya Pradesh\u2019s largest creator community \u2014 and 2026 is set to be the biggest one yet. Registrations and passes open soon. Follow along so you don\u2019t miss the drop.',
+  notifyHref: 'https://www.instagram.com/bhopalcreatorssummit/',
+  notifyLabel: 'Follow for Updates',
+};
 
 export const sponsors = [
   { name: 'SAM Global University' },
@@ -247,8 +298,10 @@ export const agenda = [
 
 export const footerLinks = [
   { label: 'About', href: '/about' },
+  { label: 'Our Journey', href: '#journey' },
   { label: 'Contact Us', href: '#contact' },
-  { label: '2024 Highlights', href: '#highlights' },
+  { label: 'Highlights', href: '#highlights' },
+  { label: '2026 \u2013 Coming Soon', href: '#coming-soon-2026' },
   { label: 'Sponsors', href: '#sponsors' },
   { label: 'Privacy Policy', href: '/privacy-policy' },
   { label: 'Terms & Conditions', href: '/terms' },

@@ -1,8 +1,68 @@
 import { Mail, Phone, MapPin } from 'lucide-react';
 import { Link } from 'react-router-dom';
-import { footerLinks, siteSettings } from '../data/siteContent';
+import { footerLinks, siteSettings, socialLinksFallback } from '../data/siteContent';
+import useApiContent from '../hooks/useApiContent';
+
+function InstagramGlyph(props) {
+  return (
+    <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" strokeWidth="2" {...props}>
+      <rect x="3" y="3" width="18" height="18" rx="5" />
+      <circle cx="12" cy="12" r="4" />
+      <circle cx="17.5" cy="6.5" r="1" fill="currentColor" stroke="none" />
+    </svg>
+  );
+}
+
+function FacebookGlyph(props) {
+  return (
+    <svg viewBox="0 0 24 24" width="18" height="18" fill="currentColor" {...props}>
+      <path d="M13.5 21v-7.5H16l.5-3.2h-3V8.2c0-.9.3-1.6 1.7-1.6H16.6V3.8c-.3 0-1.3-.1-2.5-.1-2.5 0-4.2 1.5-4.2 4.3v2.3H7.4v3.2H10V21h3.5Z" />
+    </svg>
+  );
+}
+
+function YoutubeGlyph(props) {
+  return (
+    <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" strokeWidth="2" {...props}>
+      <rect x="2.5" y="6" width="19" height="12" rx="3.5" />
+      <path d="M10.5 9.5v5l4.5-2.5-4.5-2.5Z" fill="currentColor" stroke="none" />
+    </svg>
+  );
+}
+
+function LinkedinGlyph(props) {
+  return (
+    <svg viewBox="0 0 24 24" width="18" height="18" fill="currentColor" {...props}>
+      <rect x="3" y="3" width="18" height="18" rx="3" fill="none" stroke="currentColor" strokeWidth="2" />
+      <circle cx="7.2" cy="8" r="1.3" />
+      <path d="M6.2 10.5h2v7h-2v-7Zm4 0h1.9v1c.5-.7 1.3-1.2 2.4-1.2 1.8 0 2.9 1.2 2.9 3.4v3.8h-2v-3.5c0-1-.4-1.8-1.4-1.8-.8 0-1.3.6-1.5 1.1-.1.2-.1.5-.1.8v3.4h-2v-7Z" />
+    </svg>
+  );
+}
+
+function XGlyph(props) {
+  return (
+    <svg viewBox="0 0 24 24" width="18" height="18" fill="currentColor" {...props}>
+      <path d="M4 4l7 8.5L4.4 20H6.9l5.6-6.4L17 20h3l-7.4-9L19.6 4h-2.5l-5.1 5.9L8 4H4Z" />
+    </svg>
+  );
+}
+
+const socialGlyphs = {
+  instagram: InstagramGlyph,
+  facebook: FacebookGlyph,
+  youtube: YoutubeGlyph,
+  linkedin: LinkedinGlyph,
+  twitter: XGlyph,
+  x: XGlyph,
+};
 
 export default function Footer() {
+  const { data: settings } = useApiContent('/settings', { socialLinks: socialLinksFallback }, 'settings');
+  const socialLinks = (settings?.socialLinks?.length ? settings.socialLinks : socialLinksFallback).filter(
+    (s) => s.isActive !== false && s.url
+  );
+
   return (
     <footer id="contact" className="bg-charcoal px-5 pb-8 pt-16 sm:px-8">
       <div className="mx-auto max-w-7xl">
@@ -67,6 +127,25 @@ export default function Footer() {
             <p className="mt-5 text-sm text-fog">
               Follow along and reach out&mdash;we reply fast during summit season.
             </p>
+            {socialLinks.length > 0 && (
+              <div className="mt-5 flex flex-wrap gap-3">
+                {socialLinks.map((s) => {
+                  const Glyph = socialGlyphs[s.platform?.toLowerCase()] || InstagramGlyph;
+                  return (
+                    <a
+                      key={s.platform + s.url}
+                      href={s.url}
+                      target="_blank"
+                      rel="noreferrer"
+                      aria-label={s.platform}
+                      className="focus-flare flex h-10 w-10 items-center justify-center rounded-full border border-panel-line text-bone transition-colors hover:border-flare hover:text-flare"
+                    >
+                      <Glyph />
+                    </a>
+                  );
+                })}
+              </div>
+            )}
           </div>
         </div>
 

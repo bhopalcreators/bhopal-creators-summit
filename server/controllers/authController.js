@@ -15,7 +15,10 @@ function sendTokenResponse(user, statusCode, res) {
   const cookieOptions = {
     httpOnly: true,
     secure: process.env.NODE_ENV === 'production',
-    sameSite: 'lax',
+    // Vercel (frontend) and Render (backend) are different sites, so the cookie needs
+    // SameSite=None in production to be sent on cross-site requests. Lax only works
+    // locally where both run on http://localhost.
+    sameSite: process.env.NODE_ENV === 'production' ? 'none' : 'lax',
     maxAge: 7 * 24 * 60 * 60 * 1000,
   };
 
@@ -66,7 +69,11 @@ export const login = asyncHandler(async (req, res) => {
 });
 
 export const logout = asyncHandler(async (req, res) => {
-  res.clearCookie('token');
+  res.clearCookie('token', {
+    httpOnly: true,
+    secure: process.env.NODE_ENV === 'production',
+    sameSite: process.env.NODE_ENV === 'production' ? 'none' : 'lax',
+  });
   res.json({ success: true, message: 'Logged out.' });
 });
 

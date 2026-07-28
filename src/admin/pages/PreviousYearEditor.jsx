@@ -21,16 +21,19 @@ export default function PreviousYearEditor() {
 
   const [year, setYear] = useState(null);
   const [relationOptions, setRelationOptions] = useState({});
+  const [albums, setAlbums] = useState([]);
   const [loading, setLoading] = useState(true);
   const [saving, setSaving] = useState(false);
 
   useEffect(() => {
     Promise.all([
       adminApi.get(`/previous-years/${id}`),
+      adminApi.get('/gallery-albums?limit=200'),
       ...RELATION_FIELDS.map((r) => adminApi.get(`${r.endpoint}?limit=200`)),
     ])
-      .then(([yearRes, ...relRes]) => {
+      .then(([yearRes, albumsRes, ...relRes]) => {
         setYear(yearRes.item);
+        setAlbums(albumsRes.items || []);
         const opts = {};
         RELATION_FIELDS.forEach((r, i) => {
           opts[r.key] = relRes[i].items || [];
@@ -68,12 +71,18 @@ export default function PreviousYearEditor() {
     list[index] = { ...list[index], [field]: value };
     set(key, list);
   };
+  const updateVideoRow = (index, mediaObj) => {
+    const list = [...(year.videos || [])];
+    list[index] = mediaObj || { url: '', publicId: '', type: 'video' };
+    set('videos', list);
+  };
 
   const handleSave = async () => {
     setSaving(true);
     try {
       // relation arrays must be plain ID strings for the API
       const payload = { ...year };
+      payload.videos = (year.videos || []).filter((v) => v?.url);
       RELATION_FIELDS.forEach((r) => {
         payload[r.key] = (year[r.key] || []).map((v) => (typeof v === 'string' ? v : v._id));
       });
@@ -186,25 +195,85 @@ export default function PreviousYearEditor() {
 
         <Section title="Winners">
           {(year.winners || []).map((w, i) => (
-            <div key={i} className="grid gap-3 sm:grid-cols-[1fr_1fr_auto]">
-              <input
-                placeholder="Award title"
-                value={w.awardTitle || ''}
-                onChange={(e) => updateListRow('winners', i, 'awardTitle', e.target.value)}
-                className="focus-flare rounded-lg border border-panel-line bg-charcoal px-3 py-2 text-sm text-bone outline-none"
+            <div key={i} className="space-y-3 rounded-lg border border-panel-line p-3">
+              <div className="grid gap-3 sm:grid-cols-[1fr_1fr_auto]">
+                <input
+                  placeholder="Award title"
+                  value={w.awardTitle || ''}
+                  onChange={(e) => updateListRow('winners', i, 'awardTitle', e.target.value)}
+                  className="focus-flare rounded-lg border border-panel-line bg-charcoal px-3 py-2 text-sm text-bone outline-none"
+                />
+                <input
+                  placeholder="Winner name"
+                  value={w.winnerName || ''}
+                  onChange={(e) => updateListRow('winners', i, 'winnerName', e.target.value)}
+                  className="focus-flare rounded-lg border border-panel-line bg-charcoal px-3 py-2 text-sm text-bone outline-none"
+                />
+                <button onClick={() => removeListRow('winners', i)} className="focus-flare text-fog hover:text-red-400" aria-label="Remove">
+                  <Trash2 size={16} />
+                </button>
+              </div>
+              <MediaField
+                label="Winner photo"
+                value={w.photo}
+                onChange={(val) => updateListRow('winners', i, 'photo', val)}
+                folder={`previous-years/${year.year}/winners`}
               />
-              <input
-                placeholder="Winner name"
-                value={w.winnerName || ''}
-                onChange={(e) => updateListRow('winners', i, 'winnerName', e.target.value)}
-                className="focus-flare rounded-lg border border-panel-line bg-charcoal px-3 py-2 text-sm text-bone outline-none"
-              />
-              <button onClick={() => removeListRow('winners', i)} className="focus-flare text-fog hover:text-red-400" aria-label="Remove">
-                <Trash2 size={16} />
-              </button>
             </div>
           ))}
-          <AddRowButton onClick={() => addListRow('winners', { awardTitle: '', winnerName: '' })} label="Add winner" />
+          <AddRowButton onClick={() => addListRow('winners', { awardTitle: '', winnerName: '', photo: null })} label="Add winner" />
+        </Section>
+
+        <Section title="Photos & Videos">
+          <div>
+            <label className="mb-1.5 block text-xs font-semibold uppercase tracking-wide text-fog">
+              Photo gallery album
+            </label>
+            <select
+              value={year.galleryAlbum || ''}
+              onChange={(e) => set('galleryAlbum', e.target.value || null)}
+              className="focus-flare w-full rounded-lg border border-panel-line bg-charcoal px-4 py-2.5 text-sm text-bone outline-none"
+            >
+              <option value="">None</option>
+              {albums.map((a) => (
+                <option key={a._id} value={a._id}>
+                  {a.title} {a.year ? `(${a.year})` : ''}
+                </option>
+              ))}
+            </select>
+            <p className="mt-1.5 text-xs text-fog">
+              Add or upload the actual photos under <strong>Gallery Photos</strong> in the sidebar, attaching each
+              one to this album. Create the album itself under <strong>Gallery Albums</strong> first if it doesn&rsquo;t
+              exist yet.
+            </p>
+          </div>
+
+          <div className="mt-5">
+            <p className="mb-2 text-xs font-semibold uppercase tracking-wide text-fog">Videos</p>
+            {(year.videos || []).map((v, i) => (
+              <div key={i} className="mb-3 flex items-start gap-3 rounded-lg border border-panel-line p-3">
+                <div className="flex-1">
+                  <MediaField
+                    label={`Video ${i + 1}`}
+                    value={v}
+                    onChange={(val) => updateVideoRow(i, val)}
+                    folder={`previous-years/${year.year}/videos`}
+                  />
+                </div>
+                <button
+                  onClick={() => removeListRow('videos', i)}
+                  className="focus-flare mt-6 text-fog hover:text-red-400"
+                  aria-label="Remove video"
+                >
+                  <Trash2 size={16} />
+                </button>
+              </div>
+            ))}
+            <AddRowButton
+              onClick={() => addListRow('videos', { url: '', publicId: '', type: 'video' })}
+              label="Add video"
+            />
+          </div>
         </Section>
 
         {RELATION_FIELDS.map((r) => {
