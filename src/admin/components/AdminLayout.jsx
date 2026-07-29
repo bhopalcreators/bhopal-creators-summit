@@ -33,9 +33,11 @@ export default function AdminLayout() {
     <div className="flex min-h-screen bg-ink">
       <aside className="hidden w-64 shrink-0 flex-col border-r border-panel-line bg-charcoal lg:flex">
         <div className="flex items-center gap-3 border-b border-panel-line px-5 py-5">
-          <div className="flex h-9 w-9 items-center justify-center rounded-md bg-gradient-to-br from-flare via-magenta to-marigold font-display text-[10px] text-ink">
-            IBC
-          </div>
+          <img
+            src="/i-am-a-bhopali-creator-2025.webp"
+            alt="Bhopal Creators Summit"
+            className="h-9 w-auto object-contain"
+          />
           <p className="font-display text-xs uppercase leading-tight text-bone">
             Admin
             <br />

@@ -13,6 +13,7 @@ export const siteSettings = {
   email: 'bhopalcreatorssummit@gmail.com',
   phones: ['+91 91 79 5523 97', '+91-8319527668'],
   instagramHandle: '@iamabhopalicreator',
+  volunteerFormUrl: '',
 };
 
 // Fallback social links, used until /api/settings returns live data (set from the admin panel).
@@ -28,13 +29,6 @@ export const navLinks = [
   { label: 'Awards', href: '#awards' },
   { label: '2026', href: '#coming-soon-2026' },
   { label: 'Tickets', href: '#tickets' },
-];
-
-export const heroCtas = [
-  { label: 'Awards', href: '#awards' },
-  { label: 'Workshops', href: '#workshops' },
-  { label: 'Competitions', href: '#competitions' },
-  { label: 'Tickets Live Now', href: '#tickets', variant: 'light' },
 ];
 
 export const aboutContent = {

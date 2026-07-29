@@ -1,8 +1,12 @@
 import { motion } from 'framer-motion';
+import { Link } from 'react-router-dom';
 import Button from './Button';
-import { heroCtas, siteSettings } from '../data/siteContent';
+import { siteSettings } from '../data/siteContent';
+import useApiContent from '../hooks/useApiContent';
 
 export default function Hero() {
+  const { data: settings } = useApiContent('/settings', siteSettings, 'settings');
+
   return (
     <section className="relative flex min-h-screen items-end overflow-hidden bg-ink pt-24">
       {/* Background video */}
@@ -42,11 +46,17 @@ export default function Hero() {
           transition={{ duration: 0.6, delay: 0.15 }}
           className="mt-10 flex flex-wrap gap-3"
         >
-          {heroCtas.map((cta) => (
-            <Button key={cta.label} href={cta.href} variant={cta.variant === 'light' ? 'light' : 'flare'}>
-              {cta.label}
-            </Button>
-          ))}
+          <Button as={Link} to="/register" variant="flare">
+            Register
+          </Button>
+          <Button
+            href={settings.volunteerFormUrl || '#contact'}
+            target={settings.volunteerFormUrl ? '_blank' : undefined}
+            rel={settings.volunteerFormUrl ? 'noreferrer' : undefined}
+            variant="light"
+          >
+            Volunteer
+          </Button>
         </motion.div>
       </div>
     </section>

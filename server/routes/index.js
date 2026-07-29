@@ -1,6 +1,7 @@
 import { Router } from 'express';
 
 import authRoutes from './authRoutes.js';
+import accountRoutes from './accountRoutes.js';
 import settingsRoutes from './settingsRoutes.js';
 import uploadRoutes from './uploadRoutes.js';
 import ticketRoutes from './ticketRoutes.js';
@@ -28,6 +29,7 @@ const router = Router();
 
 // Auth & platform
 router.use('/auth', authRoutes);
+router.use('/account', accountRoutes); // public site visitor register/login (separate from /auth, which is staff/admin)
 router.use('/settings', settingsRoutes);
 router.use('/uploads', uploadRoutes);
 router.use('/submissions', submissionRoutes);

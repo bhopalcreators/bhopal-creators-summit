@@ -6,7 +6,11 @@ import Home from './pages/Home';
 import AboutPage from './pages/AboutPage';
 import PreviousYearPage from './pages/PreviousYearPage';
 import CompetitionPage from './pages/CompetitionPage';
+import Register from './pages/Register';
+import Login from './pages/Login';
+import MyAccount from './pages/MyAccount';
 import AdminApp from './admin/AdminApp';
+import { AccountProvider } from './context/AccountContext';
 
 function ScrollToHash() {
   const { hash, pathname } = useLocation();
@@ -29,19 +33,24 @@ function ScrollToHash() {
 
 function PublicSite() {
   return (
-    <div className="min-h-screen bg-ink">
-      <Navbar />
-      <ScrollToHash />
-      <main>
-        <Routes>
-          <Route path="/" element={<Home />} />
-          <Route path="/about" element={<AboutPage />} />
-          <Route path="/previous-years/:slug" element={<PreviousYearPage />} />
-          <Route path="/competitions/:slug" element={<CompetitionPage />} />
-        </Routes>
-      </main>
-      <Footer />
-    </div>
+    <AccountProvider>
+      <div className="min-h-screen bg-ink">
+        <Navbar />
+        <ScrollToHash />
+        <main>
+          <Routes>
+            <Route path="/" element={<Home />} />
+            <Route path="/about" element={<AboutPage />} />
+            <Route path="/previous-years/:slug" element={<PreviousYearPage />} />
+            <Route path="/competitions/:slug" element={<CompetitionPage />} />
+            <Route path="/register" element={<Register />} />
+            <Route path="/login" element={<Login />} />
+            <Route path="/my-account" element={<MyAccount />} />
+          </Routes>
+        </main>
+        <Footer />
+      </div>
+    </AccountProvider>
   );
 }
 

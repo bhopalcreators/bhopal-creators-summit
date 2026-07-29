@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { Menu, X, ShoppingBag, User } from 'lucide-react';
 import { navLinks, siteSettings } from '../data/siteContent';
+import { useAccount } from '../context/AccountContext';
 
 function NavAnchor({ href, className, onClick, children }) {
   if (href.startsWith('/')) {
@@ -29,6 +30,7 @@ function NavAnchor({ href, className, onClick, children }) {
 export default function Navbar() {
   const [scrolled, setScrolled] = useState(false);
   const [open, setOpen] = useState(false);
+  const { attendee } = useAccount();
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 24);
@@ -42,15 +44,13 @@ export default function Navbar() {
         scrolled ? 'bg-ink/90 backdrop-blur-md' : 'bg-transparent'
       }`}
     >
-      <div className="mx-auto flex max-w-7xl items-center justify-between px-5 py-4 sm:px-8">
+      <div className="mx-auto flex max-w-7xl items-center justify-between px-5 py-3 sm:px-8">
         <Link to="/" className="flex items-center gap-3 focus-flare">
-          <div className="flex h-11 w-11 items-center justify-center rounded-md bg-gradient-to-br from-flare via-magenta to-marigold font-display text-xs leading-none text-ink">
-            IBC
-          </div>
-          <div className="leading-tight">
-            <p className="font-display text-sm uppercase tracking-wide text-bone">iAMA Bhopali</p>
-            <p className="font-display text-sm uppercase tracking-wide text-bone">Creator</p>
-          </div>
+          <img
+            src="/i-am-a-bhopali-creator-2025.webp"
+            alt="iAMA Bhopali Creator - Bhopal Creators Summit"
+            className="h-16 w-auto object-contain sm:h-20"
+          />
         </Link>
 
         <nav className="hidden items-center gap-9 lg:flex">
@@ -72,10 +72,10 @@ export default function Navbar() {
               0
             </span>
           </a>
-          <a href="/my-account" className="focus-flare flex items-center gap-2 text-sm font-semibold text-bone hover:text-flare">
+          <Link to="/my-account" className="focus-flare flex items-center gap-2 text-sm font-semibold text-bone hover:text-flare">
             <User size={16} />
-            Login / Register
-          </a>
+            {attendee ? attendee.name.split(' ')[0] : 'Login / Register'}
+          </Link>
         </div>
 
         <button
@@ -101,12 +101,13 @@ export default function Navbar() {
                 {link.label}
               </NavAnchor>
             ))}
-            <a
-              href="/my-account"
+            <Link
+              to="/my-account"
+              onClick={() => setOpen(false)}
               className="focus-flare mt-2 rounded-md px-2 py-3 text-base font-semibold text-bone hover:bg-panel hover:text-flare"
             >
-              Login / Register
-            </a>
+              {attendee ? attendee.name.split(' ')[0] : 'Login / Register'}
+            </Link>
           </nav>
         </div>
       )}

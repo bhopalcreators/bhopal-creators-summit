@@ -48,6 +48,9 @@ const siteSettingsSchema = new mongoose.Schema(
     },
 
     footerAbout: String,
+
+    // Google Form (or any external URL) the hero "Volunteer" button links to
+    volunteerFormUrl: String,
   },
   { timestamps: true }
 );

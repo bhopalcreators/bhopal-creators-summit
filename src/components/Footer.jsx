@@ -68,9 +68,11 @@ export default function Footer() {
       <div className="mx-auto max-w-7xl">
         <div className="grid gap-12 sm:grid-cols-2 lg:grid-cols-4">
           <div>
-            <div className="flex h-11 w-24 items-center justify-center rounded-md bg-gradient-to-br from-flare via-magenta to-marigold font-display text-xs text-ink">
-              iAMA
-            </div>
+            <img
+              src="/i-am-a-bhopali-creator-2025.webp"
+              alt="iAMA Bhopali Creator - Bhopal Creators Summit"
+              className="h-14 w-auto object-contain"
+            />
             <h3 className="mt-5 font-display text-base uppercase text-bone">All Rounder Services</h3>
             <p className="mt-3 text-sm leading-relaxed text-fog">
               The Bhopal Creators Summit brings India&rsquo;s creative minds together in the heart of
