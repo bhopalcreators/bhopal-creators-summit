@@ -1,4 +1,6 @@
 import Button from './Button';
+import { socialLinksFallback } from '../data/siteContent';
+import useApiContent from '../hooks/useApiContent';
 
 function InstagramGlyph(props) {
   return (
@@ -11,6 +13,12 @@ function InstagramGlyph(props) {
 }
 
 export default function InstagramCTA() {
+  const { data: settings } = useApiContent('/settings', { socialLinks: socialLinksFallback }, 'settings');
+  const socialLinks = settings?.socialLinks?.length ? settings.socialLinks : socialLinksFallback;
+  const instagramUrl =
+    socialLinks.find((s) => s.platform?.toLowerCase() === 'instagram' && s.isActive !== false && s.url)?.url ||
+    'https://instagram.com';
+
   return (
     <section className="bg-charcoal px-5 py-20 text-center sm:px-8">
       <h2
@@ -26,7 +34,7 @@ export default function InstagramCTA() {
       </h2>
       <div className="mt-8">
         <Button
-          href="https://instagram.com"
+          href={instagramUrl}
           target="_blank"
           rel="noreferrer"
           variant="ghost"

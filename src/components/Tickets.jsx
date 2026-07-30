@@ -88,14 +88,16 @@ function TicketStub({ ticket }) {
 
 export default function Tickets() {
   const { data: rawTickets } = useApiContent('/tickets', fallbackTickets);
+  const { data: settings } = useApiContent('/settings', siteSettings, 'settings');
   const tickets = rawTickets.map(normalizeTicket);
+  const eventName = settings?.eventName || siteSettings.eventName;
 
   return (
     <section id="tickets" className="bg-ink px-5 py-24 sm:px-8">
       <div className="mx-auto max-w-5xl">
         <p className="font-mono text-xs uppercase tracking-[0.25em] text-flare">2025</p>
         <h2 className="mt-3 font-display text-4xl uppercase leading-[0.95] text-bone sm:text-5xl">
-          {siteSettings.eventName}
+          {eventName}
         </h2>
 
         <div className="mt-12">

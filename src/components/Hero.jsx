@@ -35,8 +35,12 @@ export default function Hero() {
           className="flex flex-col gap-1 sm:flex-row sm:items-end sm:gap-8"
         >
           <div>
-            <p className="font-display text-5xl uppercase text-bone sm:text-6xl">{siteSettings.date}</p>
-            <p className="font-mono text-sm uppercase tracking-[0.2em] text-bone/80">{siteSettings.venue}</p>
+            <p className="font-display text-5xl uppercase text-bone sm:text-6xl">
+              {settings.eventDateLabel || siteSettings.date}
+            </p>
+            <p className="font-mono text-sm uppercase tracking-[0.2em] text-bone/80">
+              {settings.venueName || siteSettings.venue}
+            </p>
           </div>
         </motion.div>
 

@@ -1,8 +1,12 @@
 import { Sparkles } from 'lucide-react';
 import Button from './Button';
-import { comingSoon2026 } from '../data/siteContent';
+import { comingSoon2026 as comingSoonFallback } from '../data/siteContent';
+import useApiContent from '../hooks/useApiContent';
 
 export default function ComingSoon2026() {
+  const { data: settings } = useApiContent('/settings', { comingSoon: comingSoonFallback }, 'settings');
+  const comingSoon2026 = settings?.comingSoon?.title ? settings.comingSoon : comingSoonFallback;
+
   return (
     <section
       id="coming-soon-2026"

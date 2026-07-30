@@ -2,10 +2,12 @@ import { ArrowRight, Sparkles } from 'lucide-react';
 import { Link } from 'react-router-dom';
 import SectionHeading from './SectionHeading';
 import useApiContent from '../hooks/useApiContent';
-import { journeyStats, previousYearsFallback } from '../data/siteContent';
+import { journeyStats as journeyStatsFallback, previousYearsFallback } from '../data/siteContent';
 
 export default function OurJourney() {
   const { data: years } = useApiContent('/previous-years?limit=50', previousYearsFallback);
+  const { data: settings } = useApiContent('/settings', { journeyStats: journeyStatsFallback }, 'settings');
+  const journeyStats = settings?.journeyStats?.length ? settings.journeyStats : journeyStatsFallback;
   const publishedYears = [...years]
     .filter((y) => y.isPublished === true)
     .sort((a, b) => a.year - b.year)

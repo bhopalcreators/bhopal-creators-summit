@@ -51,6 +51,54 @@ const siteSettingsSchema = new mongoose.Schema(
 
     // Google Form (or any external URL) the hero "Volunteer" button links to
     volunteerFormUrl: String,
+
+    // "About the Summit" section (homepage + /about page)
+    about: {
+      eyebrow: { type: String, default: 'UNITE. CREATE. CELEBRATE.' },
+      title: { type: String, default: 'About the Summit' },
+      paragraphs: { type: [String], default: [] },
+      highlights: [
+        {
+          icon: { type: String, default: 'Mic' }, // Mic | Heart | Presentation
+          title: String,
+          copy: String,
+        },
+      ],
+    },
+
+    // Header nav links, shown on desktop + mobile menu
+    navLinks: [
+      {
+        label: { type: String, required: true },
+        href: { type: String, required: true },
+      },
+    ],
+
+    // Footer "Links" column
+    footerLinks: [
+      {
+        label: { type: String, required: true },
+        href: { type: String, required: true },
+      },
+    ],
+
+    // "3 Years of Bhopal Creators Summit" stat strip on the Our Journey section
+    journeyStats: [
+      {
+        value: { type: String, required: true },
+        label: { type: String, required: true },
+        sub: String,
+      },
+    ],
+
+    // "Coming soon" teaser section for next year's edition
+    comingSoon: {
+      eyebrow: String,
+      title: String,
+      copy: String,
+      notifyHref: String,
+      notifyLabel: { type: String, default: 'Follow for Updates' },
+    },
   },
   { timestamps: true }
 );

@@ -62,6 +62,13 @@ export default function Footer() {
   const socialLinks = (settings?.socialLinks?.length ? settings.socialLinks : socialLinksFallback).filter(
     (s) => s.isActive !== false && s.url
   );
+  const email = settings?.contactEmail || siteSettings.email;
+  const phones = settings?.contactPhones?.length ? settings.contactPhones : siteSettings.phones;
+  const venueFull = settings?.venueFullAddress || siteSettings.venueFull;
+  const aboutCopy =
+    settings?.footerAbout ||
+    "The Bhopal Creators Summit brings India\u2019s creative minds together in the heart of Madhya Pradesh. Fueled by digital ambition and cultural roots, it\u2019s more than a SUMMIT\u2014it\u2019s a MOVEMENT.";
+  const links = settings?.footerLinks?.length ? settings.footerLinks : footerLinks;
 
   return (
     <footer id="contact" className="bg-charcoal px-5 pb-8 pt-16 sm:px-8">
@@ -74,11 +81,7 @@ export default function Footer() {
               className="h-14 w-auto object-contain"
             />
             <h3 className="mt-5 font-display text-base uppercase text-bone">All Rounder Services</h3>
-            <p className="mt-3 text-sm leading-relaxed text-fog">
-              The Bhopal Creators Summit brings India&rsquo;s creative minds together in the heart of
-              Madhya Pradesh. Fueled by digital ambition and cultural roots, it&rsquo;s more than a
-              SUMMIT&mdash;it&rsquo;s a MOVEMENT.
-            </p>
+            <p className="mt-3 text-sm leading-relaxed text-fog">{aboutCopy}</p>
           </div>
 
           <div>
@@ -86,11 +89,11 @@ export default function Footer() {
             <ul className="mt-5 space-y-3 text-sm text-fog">
               <li className="flex items-center gap-2">
                 <Mail size={15} className="text-flare" />
-                <a href={`mailto:${siteSettings.email}`} className="focus-flare hover:text-flare">
-                  {siteSettings.email}
+                <a href={`mailto:${email}`} className="focus-flare hover:text-flare">
+                  {email}
                 </a>
               </li>
-              {siteSettings.phones.map((p) => (
+              {phones.map((p) => (
                 <li key={p} className="flex items-center gap-2">
                   <Phone size={15} className="text-flare" />
                   <a href={`tel:${p.replace(/\s/g, '')}`} className="focus-flare hover:text-flare">
@@ -100,7 +103,7 @@ export default function Footer() {
               ))}
               <li className="flex items-center gap-2">
                 <MapPin size={15} className="text-flare" />
-                {siteSettings.venueFull}
+                {venueFull}
               </li>
             </ul>
           </div>
@@ -108,7 +111,7 @@ export default function Footer() {
           <div>
             <h3 className="font-display text-base uppercase text-bone">Links</h3>
             <ul className="mt-5 space-y-3 text-sm text-fog">
-              {footerLinks.map((l) => (
+              {links.map((l) => (
                 <li key={l.label}>
                   {l.href.startsWith('/') ? (
                     <Link to={l.href} className="focus-flare hover:text-flare">

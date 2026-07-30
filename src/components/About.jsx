@@ -1,9 +1,13 @@
 import { Mic, Heart, Presentation } from 'lucide-react';
 import { aboutContent } from '../data/siteContent';
+import useApiContent from '../hooks/useApiContent';
 
 const icons = { Mic, Heart, Presentation };
 
 export default function About() {
+  const { data: settings } = useApiContent('/settings', { about: aboutContent }, 'settings');
+  const about = settings?.about?.paragraphs?.length ? settings.about : aboutContent;
+
   return (
     <section id="about" className="bg-ink px-5 py-24 sm:px-8">
       <div className="mx-auto grid max-w-7xl gap-14 lg:grid-cols-2 lg:gap-20">
@@ -33,14 +37,14 @@ export default function About() {
         {/* Copy */}
         <div>
           <p className="mb-3 font-mono text-xs font-semibold uppercase tracking-[0.25em] text-flare">
-            {aboutContent.eyebrow}
+            {about.eyebrow}
           </p>
           <h2 className="font-display text-4xl uppercase leading-[0.95] text-bone sm:text-5xl">
-            {aboutContent.title}
+            {about.title}
           </h2>
 
           <div className="mt-6 space-y-4 text-fog">
-            {aboutContent.paragraphs.map((p, i) => (
+            {about.paragraphs.map((p, i) => (
               <p key={i} className="leading-relaxed">
                 {p}
               </p>
@@ -48,8 +52,8 @@ export default function About() {
           </div>
 
           <div className="mt-10 space-y-8">
-            {aboutContent.highlights.map((h) => {
-              const Icon = icons[h.icon];
+            {(about.highlights || []).map((h) => {
+              const Icon = icons[h.icon] || Mic;
               return (
                 <div key={h.title} className="flex gap-4">
                   <Icon className="mt-1 shrink-0 text-flare" size={26} strokeWidth={1.5} />

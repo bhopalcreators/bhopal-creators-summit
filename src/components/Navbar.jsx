@@ -1,8 +1,9 @@
 import { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { Menu, X, ShoppingBag, User } from 'lucide-react';
-import { navLinks, siteSettings } from '../data/siteContent';
+import { navLinks as navLinksFallback, siteSettings } from '../data/siteContent';
 import { useAccount } from '../context/AccountContext';
+import useApiContent from '../hooks/useApiContent';
 
 function NavAnchor({ href, className, onClick, children }) {
   if (href.startsWith('/')) {
@@ -31,6 +32,9 @@ export default function Navbar() {
   const [scrolled, setScrolled] = useState(false);
   const [open, setOpen] = useState(false);
   const { attendee } = useAccount();
+  const { data: settings } = useApiContent('/settings', siteSettings, 'settings');
+  const navLinks = settings?.navLinks?.length ? settings.navLinks : navLinksFallback;
+  const eventName = settings?.eventName || siteSettings.eventName;
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 24);
@@ -111,7 +115,7 @@ export default function Navbar() {
           </nav>
         </div>
       )}
-      <p className="sr-only">{siteSettings.eventName}</p>
+      <p className="sr-only">{eventName}</p>
     </header>
   );
 }
