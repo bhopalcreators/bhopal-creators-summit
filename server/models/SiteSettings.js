@@ -1,4 +1,5 @@
 import mongoose from 'mongoose';
+import mediaSchema from './shared/mediaSchema.js';
 
 const socialLinkSchema = new mongoose.Schema(
   { platform: String, url: String, isActive: { type: Boolean, default: true } },
@@ -57,6 +58,7 @@ const siteSettingsSchema = new mongoose.Schema(
       eyebrow: { type: String, default: 'UNITE. CREATE. CELEBRATE.' },
       title: { type: String, default: 'About the Summit' },
       paragraphs: { type: [String], default: [] },
+      images: [mediaSchema], // collage tiles: [0]=top-left square, [1]=top-right square, [2]=wide bottom tile
       highlights: [
         {
           icon: { type: String, default: 'Mic' }, // Mic | Heart | Presentation

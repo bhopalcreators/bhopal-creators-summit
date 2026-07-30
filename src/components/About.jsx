@@ -7,30 +7,55 @@ const icons = { Mic, Heart, Presentation };
 export default function About() {
   const { data: settings } = useApiContent('/settings', { about: aboutContent }, 'settings');
   const about = settings?.about?.paragraphs?.length ? settings.about : aboutContent;
+  const images = about.images || [];
 
   return (
     <section id="about" className="bg-ink px-5 py-24 sm:px-8">
       <div className="mx-auto grid max-w-7xl gap-14 lg:grid-cols-2 lg:gap-20">
         {/* Image collage */}
         <div className="grid grid-cols-2 gap-4">
-          <div className="flex aspect-square flex-col justify-end rounded-2xl bg-flare p-6">
-            <p className="font-display text-2xl uppercase leading-[0.95] text-ink">
-              Bhopal Creators
-              <br />
-              Summit 2025
-            </p>
+          <div className="relative flex aspect-square flex-col justify-end overflow-hidden rounded-2xl bg-flare p-6">
+            {images[0]?.url ? (
+              <img
+                src={images[0].url}
+                alt={images[0].altText || 'Bhopal Creators Summit 2025'}
+                className="absolute inset-0 h-full w-full object-cover"
+              />
+            ) : (
+              <p className="font-display text-2xl uppercase leading-[0.95] text-ink">
+                Bhopal Creators
+                <br />
+                Summit 2025
+              </p>
+            )}
           </div>
           <div className="aspect-square overflow-hidden rounded-2xl bg-panel">
-            <div className="flex h-full w-full items-center justify-center bg-gradient-to-br from-panel to-charcoal text-fog">
-              <Mic size={40} />
-            </div>
+            {images[1]?.url ? (
+              <img
+                src={images[1].url}
+                alt={images[1].altText || 'Bhopal Creators Summit'}
+                className="h-full w-full object-cover"
+              />
+            ) : (
+              <div className="flex h-full w-full items-center justify-center bg-gradient-to-br from-panel to-charcoal text-fog">
+                <Mic size={40} />
+              </div>
+            )}
           </div>
           <div className="col-span-2 aspect-[16/10] overflow-hidden rounded-2xl bg-panel">
-            <div className="flex h-full w-full items-center justify-center bg-gradient-to-br from-panel to-charcoal">
-              <p className="font-display text-lg uppercase tracking-wide text-fog">
-                Bhopal Creators Summit 2024
-              </p>
-            </div>
+            {images[2]?.url ? (
+              <img
+                src={images[2].url}
+                alt={images[2].altText || 'Bhopal Creators Summit 2024'}
+                className="h-full w-full object-cover"
+              />
+            ) : (
+              <div className="flex h-full w-full items-center justify-center bg-gradient-to-br from-panel to-charcoal">
+                <p className="font-display text-lg uppercase tracking-wide text-fog">
+                  Bhopal Creators Summit 2024
+                </p>
+              </div>
+            )}
           </div>
         </div>
 

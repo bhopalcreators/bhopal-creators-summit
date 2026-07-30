@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react';
 import adminApi from '../lib/adminApi';
 import { useToast } from '../components/Toast';
+import MediaField from '../components/MediaField';
 import {
   navLinks as navLinksDefault,
   footerLinks as footerLinksDefault,
@@ -75,6 +76,17 @@ export default function Settings() {
   const removeItem = (path, index) => updateArray(path, (arr) => arr.filter((_, i) => i !== index));
   const updateItem = (path, index, key, value) =>
     updateArray(path, (arr) => arr.map((item, i) => (i === index ? { ...item, [key]: value } : item)));
+
+  const setAboutImage = (index, asset) => {
+    setSettings((prev) => {
+      const next = structuredClone(prev);
+      const images = Array.isArray(next.about.images) ? [...next.about.images] : [];
+      while (images.length <= index) images.push(null);
+      images[index] = asset;
+      next.about.images = images;
+      return next;
+    });
+  };
 
   const handleSave = async (e) => {
     e.preventDefault();
@@ -151,6 +163,35 @@ export default function Settings() {
             onChange={(v) => set('about.eyebrow', v)}
           />
           <Field label="Title" value={settings.about?.title} onChange={(v) => set('about.title', v)} />
+
+          <div>
+            <label className="mb-1.5 block text-xs font-semibold uppercase tracking-wide text-fog">
+              Collage images
+            </label>
+            <div className="grid grid-cols-1 gap-3 sm:grid-cols-3">
+              <MediaField
+                label="Image 1 (top-left tile)"
+                value={settings.about?.images?.[0]}
+                onChange={(asset) => setAboutImage(0, asset)}
+                folder="about"
+              />
+              <MediaField
+                label="Image 2 (top-right tile)"
+                value={settings.about?.images?.[1]}
+                onChange={(asset) => setAboutImage(1, asset)}
+                folder="about"
+              />
+              <MediaField
+                label="Image 3 (wide bottom tile)"
+                value={settings.about?.images?.[2]}
+                onChange={(asset) => setAboutImage(2, asset)}
+                folder="about"
+              />
+            </div>
+            <p className="mt-1.5 text-xs text-fog">
+              Leave any tile empty and the site will keep showing its placeholder design for that tile.
+            </p>
+          </div>
           <Field
             label="Paragraphs (one per line)"
             value={(settings.about?.paragraphs || []).join('\n')}
