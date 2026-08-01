@@ -10,7 +10,7 @@ export default function Awards() {
     <section id="awards" className="bg-ink px-5 py-24 sm:px-8">
       <div className="mx-auto max-w-7xl">
         <h2 className="text-center font-display text-3xl uppercase tracking-wide text-marigold sm:text-4xl">
-          <span aria-hidden>🏆</span> Creator Awards 2025 <span aria-hidden>🏆</span>
+          Creator Awards 2025 
         </h2>
 
         <div className="mt-16 grid grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-4">
