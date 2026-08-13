@@ -1,11 +1,16 @@
 import { useEffect, useState } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useLocation } from 'react-router-dom';
 import { Menu, X, ShoppingBag, User } from 'lucide-react';
-import { navLinks as navLinksFallback, siteSettings } from '../data/siteContent';
+import {
+  navLinks as navLinksFallback,
+  navLinks2025 as navLinks2025Fallback,
+  siteSettings,
+  siteSettings2026,
+} from '../data/siteContent';
 import { useAccount } from '../context/AccountContext';
 import useApiContent from '../hooks/useApiContent';
 
-function NavAnchor({ href, className, onClick, children }) {
+function NavAnchor({ href, basePath, className, onClick, children }) {
   if (href.startsWith('/')) {
     return (
       <Link to={href} className={className} onClick={onClick}>
@@ -14,9 +19,10 @@ function NavAnchor({ href, className, onClick, children }) {
     );
   }
   if (href.startsWith('#')) {
-    // Anchor links always need to resolve against the homepage, not whatever page we're currently on.
+    // Anchor links resolve against whichever page we're currently on
+    // (basePath is "/" on the 2026 homepage, "/2025" on the archived page).
     return (
-      <Link to={`/${href}`} className={className} onClick={onClick}>
+      <Link to={`${basePath}${href}`} className={className} onClick={onClick}>
         {children}
       </Link>
     );
@@ -32,9 +38,20 @@ export default function Navbar() {
   const [scrolled, setScrolled] = useState(false);
   const [open, setOpen] = useState(false);
   const { attendee } = useAccount();
+  const location = useLocation();
+  const isLegacy2025 = location.pathname === '/2025' || location.pathname.startsWith('/2025/');
+  const basePath = isLegacy2025 ? '/2025' : '/';
+
+  // Nav links are fixed in code on both pages (not CMS-driven). The live
+  // /settings API can hold a stale navLinks array from before the 2026
+  // relaunch, so we deliberately never let it override this list — otherwise
+  // the "2025" link and correctly-scoped anchors would get clobbered by
+  // whatever is currently saved in the database.
   const { data: settings } = useApiContent('/settings', siteSettings, 'settings');
-  const navLinks = settings?.navLinks?.length ? settings.navLinks : navLinksFallback;
-  const eventName = settings?.eventName || siteSettings.eventName;
+  const navLinks = isLegacy2025 ? navLinks2025Fallback : navLinksFallback;
+  const eventName = isLegacy2025
+    ? settings?.eventName || siteSettings.eventName
+    : siteSettings2026.eventName;
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 24);
@@ -62,6 +79,7 @@ export default function Navbar() {
             <NavAnchor
               key={link.label}
               href={link.href}
+              basePath={basePath}
               className="focus-flare text-sm font-semibold text-bone/90 transition-colors hover:text-flare"
             >
               {link.label}
@@ -99,6 +117,7 @@ export default function Navbar() {
               <NavAnchor
                 key={link.label}
                 href={link.href}
+                basePath={basePath}
                 onClick={() => setOpen(false)}
                 className="focus-flare rounded-md px-2 py-3 text-base font-semibold text-bone hover:bg-panel hover:text-flare"
               >

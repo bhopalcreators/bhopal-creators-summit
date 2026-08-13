@@ -3,6 +3,8 @@ import { useEffect } from 'react';
 import Navbar from './components/Navbar';
 import Footer from './components/Footer';
 import Home from './pages/Home';
+import Home2025 from './pages/Home2025';
+import SponsorshipPage from './pages/SponsorshipPage';
 import AboutPage from './pages/AboutPage';
 import PreviousYearPage from './pages/PreviousYearPage';
 import CompetitionPage from './pages/CompetitionPage';
@@ -40,6 +42,8 @@ function PublicSite() {
         <main>
           <Routes>
             <Route path="/" element={<Home />} />
+            <Route path="/2025" element={<Home2025 />} />
+            <Route path="/partner-with-us" element={<SponsorshipPage />} />
             <Route path="/about" element={<AboutPage />} />
             <Route path="/previous-years/:slug" element={<PreviousYearPage />} />
             <Route path="/competitions/:slug" element={<CompetitionPage />} />

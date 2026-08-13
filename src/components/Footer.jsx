@@ -158,8 +158,8 @@ export default function Footer() {
           <p>&copy; {new Date().getFullYear()}. All Rights Reserved.</p>
           <p>
             Site designed &amp; Managed by:{' '}
-            <a href="https://vistaarwebx.com/" target="_blank" rel="noreferrer" className="focus-flare font-semibold text-bone hover:text-flare">
-              Vistaar WebX
+            <a href="https://toflymediaa.com/" target="_blank" rel="noreferrer" className="focus-flare font-semibold text-bone hover:text-flare">
+              Tofly Media
             </a>
           </p>
         </div>

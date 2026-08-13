@@ -1,36 +1,41 @@
-import Hero from '../components/Hero';
-import About from '../components/About';
-import Stats from '../components/Stats';
+import Hero2026 from '../components/Hero2026';
+import About2026 from '../components/About2026';
+import Stats2026 from '../components/Stats2026';
+import BigIdea2026 from '../components/BigIdea2026';
+import SeasonStructure2026 from '../components/SeasonStructure2026';
+import ChallengeCategories2026 from '../components/ChallengeCategories2026';
+import CommunityEngagement2026 from '../components/CommunityEngagement2026';
+import GrandFinale2026 from '../components/GrandFinale2026';
+import SignatureExperiences2026 from '../components/SignatureExperiences2026';
+import CreatorAwards2026 from '../components/CreatorAwards2026';
+import SponsorCTA from '../components/SponsorCTA';
 import OurJourney from '../components/OurJourney';
-import Sponsors from '../components/Sponsors';
-import Competitions from '../components/Competitions';
-import Workshops from '../components/Workshops';
-import Awards from '../components/Awards';
-import Activities from '../components/Activities';
-import Highlights from '../components/Highlights';
-import Testimonials from '../components/Testimonials';
 import ComingSoon2026 from '../components/ComingSoon2026';
-import Tickets from '../components/Tickets';
-import Agenda from '../components/Agenda';
 import InstagramCTA from '../components/InstagramCTA';
 
+// Default homepage ("/") — the 2026 edition. The 2025 site lives, unmodified,
+// at /2025 via Home2025.jsx.
+//
+// Note: Tickets and Agenda are intentionally left out here — their fallback
+// data is hardcoded to 31-AUG-2025 (sold-out/early-bird tiers, 2025 dates),
+// which would contradict the "date & venue TBA" messaging for 2026. Add them
+// back once real 2026 ticket data exists.
 export default function Home() {
   return (
     <>
-      <Hero />
-      <About />
-      <Stats />
+      <Hero2026 />
+      <About2026 />
+      <Stats2026 />
+      <BigIdea2026 />
+      <SeasonStructure2026 />
+      <ChallengeCategories2026 />
+      <CommunityEngagement2026 />
+      <GrandFinale2026 />
+      <SignatureExperiences2026 />
+      <CreatorAwards2026 />
+      <SponsorCTA />
       <OurJourney />
-      <Sponsors />
-      <Competitions />
-      <Workshops />
-      <Awards />
-      <Activities />
-      <Highlights />
-      <Testimonials />
       <ComingSoon2026 />
-      <Tickets />
-      <Agenda />
       <InstagramCTA />
     </>
   );

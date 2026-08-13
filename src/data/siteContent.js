@@ -21,13 +21,27 @@ export const socialLinksFallback = [
   { platform: 'instagram', url: 'https://www.instagram.com/bhopalcreatorssummit/', isActive: true },
 ];
 
+// Nav shown on the main site (default homepage = 2026).
 export const navLinks = [
+  { label: 'About Us', href: '/about' },
+  { label: 'Our Journey', href: '#journey' },
+  { label: 'Season', href: '#season' },
+  { label: 'Challenges', href: '#challenges' },
+  { label: 'Community', href: '#community' },
+  { label: 'Awards', href: '#awards' },
+  { label: 'Partner With Us', href: '/partner-with-us' },
+  { label: '2025', href: '/2025' },
+];
+
+// Nav shown on the archived /2025 page (identical to the original site nav,
+// except the old "2026" teaser link now points at the live 2026 homepage).
+export const navLinks2025 = [
   { label: 'About Us', href: '/about' },
   { label: 'Our Journey', href: '#journey' },
   { label: 'Competitions', href: '#competitions' },
   { label: 'Workshops', href: '#workshops' },
   { label: 'Awards', href: '#awards' },
-  { label: '2026', href: '#coming-soon-2026' },
+  { label: '2026', href: '/' },
   { label: 'Tickets', href: '#tickets' },
 ];
 
@@ -301,3 +315,522 @@ export const footerLinks = [
   { label: 'Terms & Conditions', href: '/terms' },
   { label: 'Shipping & Delivery Policy', href: '/shipping-policy' },
 ];
+
+// ---------------------------------------------------------------------------
+// 2026 edition content — powers the new default homepage ("/"). The 2025
+// exports above are untouched and continue to power the archived /2025 page.
+// ---------------------------------------------------------------------------
+
+export const siteSettings2026 = {
+  ...siteSettings,
+  eventName: 'Bhopal Creators Summit 2026',
+  tagline: 'BCS IS BACK.',
+  date: 'DATE',
+  dateFull: 'To Be Announced',
+  venue: 'VENUE',
+  venueFull: 'To Be Announced',
+};
+
+export const aboutContent2026 = {
+  eyebrow: 'BHOPAL CREATORS SUMMIT — 2026',
+  title: 'About the Summit',
+  paragraphs: [
+    "BCS is back. After three editions and a community that's grown louder every year, the Bhopal Creators Summit returns in 2026 to bring Madhya Pradesh's creators together once again — bigger stages, deeper collaborations, and a lot more surprises in store.",
+    "We're still finalising the date, the venue, and everything in between. But the mission stays the same: celebrate the region's creative talent and give every kind of creator — photographers, filmmakers, influencers, and everyone in between — a room worth showing up for.",
+  ],
+  highlights: [
+    {
+      icon: 'Mic',
+      title: 'Live Performances',
+      copy: 'Dance, music, and stand-up comedy are coming back to the stage — details dropping soon.',
+    },
+    {
+      icon: 'Heart',
+      title: 'Collaboration Zone',
+      copy: 'A space for creators and brands to meet, exchange ideas, and kick off projects worth watching.',
+    },
+    {
+      icon: 'Presentation',
+      title: 'Creator Talks',
+      copy: 'Candid conversations with the creators shaping the region\u2019s digital culture — now in its 4th year.',
+    },
+  ],
+};
+
+export const stats2026 = [
+  { value: '1200+', label: 'Creators Attended' },
+  { value: '50M+', label: 'Overall Reach' },
+  { value: '5L+', label: 'Impressions' },
+  { value: '20+', label: 'Brands Associations' },
+  { value: '\u221E', label: 'Networking' },
+];
+
+// ---------------------------------------------------------------------------
+// Creator Season 2026 — general event content, sourced from the official
+// sponsorship PDF. Powers the 2026 homepage (the parts that describe the
+// season itself, not the sponsorship pitch — that lives in sponsorship2026
+// below and powers /partner-with-us).
+// ---------------------------------------------------------------------------
+
+export const bigIdea2026 = {
+  eyebrow: 'THE BIG IDEA',
+  title: 'From a One-Day Summit to a 30-Day Creator Carnival',
+  copy: "Bhopal Creator Summit has already completed its Third Edition and hosted 1500+ creators, performers and artists. For 2026, we're rebuilding it as Central India's largest creator ecosystem \u2014 a month-long Creator Carnival for photographers, filmmakers, dancers, musicians, painters and digital creators alike, culminating in a flagship one-day summit and awards ceremony.",
+  quote:
+    'Like a film festival or a startup summit, the goal is to build this into an annual intellectual property \u2014 one that compounds creator engagement, sponsor ROI and media reach every year it returns.',
+  stats: [
+    { value: '30', label: 'Days of Creator Carnival' },
+    { value: '1500+', label: 'Creators, past editions' },
+    { value: '50M+', label: 'Combined creator reach' },
+    { value: '16', label: 'Sponsorship properties' },
+  ],
+};
+
+export const seasonStructure2026 = {
+  eyebrow: 'SEASON STRUCTURE',
+  title: 'The Creator Season Journey',
+  intro:
+    'Four phases across 30 days, engineered to generate continuous content, community activity and sponsor touchpoints before the flagship finale.',
+  phases: [
+    {
+      number: '01',
+      title: 'Early Sponsor Reveal',
+      days: 'Day 1',
+      items: [
+        'Early sponsor reveal & partnership announcements',
+        'Registrations open',
+        'Digital creator kits distributed',
+        'Community activation & theme reveal',
+      ],
+    },
+    {
+      number: '02',
+      title: 'Creator Challenges',
+      days: 'Days 2\u201320',
+      items: [
+        'Photography, Reels, Film, Podcast, AI, Gaming, Art, Music',
+        'Weekly highlights, public voting & creator spotlights',
+        'Mentorship from industry leaders',
+        'Leaderboard & rewards',
+      ],
+    },
+    {
+      number: '03',
+      title: 'Community Engagement',
+      days: 'Days 5\u201328',
+      items: [
+        'Workshops & masterclasses',
+        'Photo walks, creator meetups & mentorship sessions',
+        'Heritage walks & local business connect drives',
+        'Running throughout the creator season',
+      ],
+    },
+    {
+      number: '04',
+      title: 'Grand Finale',
+      days: 'Day 30',
+      items: [
+        'One-day festival: keynotes, panels, exhibitions & performances',
+        'Marketplace, live challenges & brand experiences',
+        'Creator Awards Night & closing celebration',
+        'Live concert & entertainment',
+      ],
+    },
+  ],
+};
+
+export const challengeCategories2026 = {
+  eyebrow: 'PHASE 02 \u2014 DAYS 2\u201320',
+  title: 'Challenges Across Every Art Form',
+  intro:
+    'Parallel competitions spanning visual, digital and performing arts \u2014 each with weekly highlights, public voting, jury selection and dedicated sponsor integration.',
+  groups: [
+    {
+      title: 'Visual & Travel',
+      items: [
+        'Photography Championship',
+        'Short Film Festival',
+        'Documentary Competition',
+        'Drone Photography & Film',
+        'Mobile Photography',
+        'Mobile Filmmaking',
+        'Travel Storytelling',
+        'Portrait Photography',
+      ],
+    },
+    {
+      title: 'Digital & Modern',
+      items: [
+        'Reel Championship',
+        'Editing Challenge',
+        'AI Content Challenge',
+        'Podcast Competition',
+        'Graphic Design Challenge',
+        'Thumbnail Design Challenge',
+        'Live Streaming Challenge',
+        'UGC Trend Challenge',
+      ],
+    },
+    {
+      title: 'Performing & Fine Arts',
+      items: [
+        'Live Painting / Art Battle',
+        'Dance Performance Championship',
+        'Live Music Competition',
+        'Street Theatre & Skit',
+        'Spoken Word & Poetry Slam',
+        'Stand-Up Comedy Challenge',
+        'Calligraphy & Craft',
+        'Sculpture & Installation Art',
+      ],
+    },
+  ],
+  note: 'Every category \u2014 electronic or non-electronic \u2014 is a sponsorable Category Partner property.',
+};
+
+export const communityEngagement2026 = {
+  eyebrow: 'PHASE 03 \u2014 DAYS 5\u201328',
+  title: 'Community Engagement, All Month Long',
+  intro: 'Recurring, on-ground activities that keep content flowing between the launch and the finale.',
+  items: [
+    { title: 'Weekend Photo Walks', copy: "Curated walks through Bhopal's lakes & heritage sites" },
+    { title: 'Creator Meetups', copy: 'Informal meets for creators to network & collaborate' },
+    { title: 'Mentor Sessions', copy: '1:1 and group sessions with established creators' },
+    { title: 'Creator Caf\u00e9s', copy: 'Casual pop-up hangouts across the city' },
+    { title: 'Local Business Story Project', copy: "Creators tell the stories of Bhopal's small businesses" },
+    { title: 'Heritage Walks', copy: "Documenting Bhopal's culture & architecture on camera" },
+    { title: 'Networking Mixers', copy: 'Structured brand-creator introductions' },
+    { title: 'Community Content Drives', copy: 'Themed weekly prompts driving UGC volume' },
+  ],
+};
+
+export const grandFinale2026 = {
+  eyebrow: 'PHASE 04 \u2014 DAY 30',
+  title: 'Grand Finale: A Festival, Not a Conference',
+  intro:
+    'Multiple parallel experiences running through the day, so every attendee has a reason to be on the floor.',
+  items: [
+    'Opening Ceremony',
+    'Industry Keynotes',
+    'Panel Discussions',
+    'Workshops',
+    'Photography Exhibition',
+    'Artwork & Craft Exhibition',
+    'Film Festival Screening',
+    'Live Performance Stage',
+    'Creator Marketplace',
+    'Live Podcast Studio',
+    'Brand Experience Zone',
+    'Networking Lounge',
+    'Portfolio Reviews',
+    'Sponsor Pavilion',
+    'Live Creator Challenges',
+    'Awards Ceremony',
+  ],
+};
+
+export const signatureExperiences2026 = {
+  eyebrow: 'WHAT MAKES THIS DIFFERENT',
+  title: 'Signature Experiences',
+  intro: 'Unique, high-concept formats built to become the identity of the summit.',
+  items: [
+    { number: '01', title: 'One Battery Challenge' },
+    { number: '02', title: '10-Minute Documentary Challenge' },
+    { number: '03', title: 'One Location, 100 Stories' },
+    { number: '04', title: 'Silent Storytelling Challenge' },
+    { number: '05', title: 'One Lens Championship' },
+    { number: '06', title: 'Creator Relay' },
+    { number: '07', title: 'Sponsor Storytelling Challenge' },
+    { number: '08', title: 'Bhopal Time Capsule Project' },
+  ],
+};
+
+export const creatorAwards2026 = {
+  eyebrow: 'SEASON FINALE',
+  title: 'The Creator Awards',
+  intro:
+    'Closing the season by recognising winners from every competition \u2014 the marquee moment of the finale.',
+  categories: [
+    'Creator of the Year',
+    'Emerging Creator',
+    'Photographer of the Year',
+    'Filmmaker of the Year',
+    'Best Reel',
+    'Best Documentary',
+    'Best AI Creation',
+    'Best Travel Story',
+    'Best Portrait',
+    'Best Performance',
+    'Best Visual Artwork',
+    'Community Impact Award',
+    'Audience Choice Award',
+    'Sponsor Choice Award',
+  ],
+};
+
+// ---------------------------------------------------------------------------
+// Creator Season 2026 — Sponsorship deck content, sourced from the official
+// sponsorship PDF. Powers the /partner-with-us page.
+// ---------------------------------------------------------------------------
+
+export const sponsorship2026 = {
+  hero: {
+    eyebrow: 'CREATOR SEASON 2026',
+    title: 'Partner With Central India\u2019s Largest Creator Ecosystem',
+    subtitle:
+      '30 days of creator challenges, culture & community \u2014 culminating in a flagship summit & awards night.',
+    location: "Central India's Largest Creator Ecosystem \u2014 Bhopal, Madhya Pradesh",
+    stats: [
+      { value: '1500+', label: 'Creators' },
+      { value: '50M+', label: 'Digital Reach' },
+      { value: '30', label: 'Days of Creator Season' },
+      { value: '100+', label: 'Brand Partners' },
+    ],
+  },
+
+  whyPartner: {
+    eyebrow: 'THE CASE FOR PARTNERSHIP',
+    title: 'Why Brands Partner With the Summit',
+    reasons: [
+      {
+        number: '1',
+        title: 'On-Site Branding',
+        copy: 'Prominent placement at key venue locations, visible to every attendee across the finale.',
+      },
+      {
+        number: '2',
+        title: '30 Days of Visibility',
+        copy: 'Unlike a one-day event, your brand is present across the full season \u2014 not just one afternoon.',
+      },
+      {
+        number: '3',
+        title: 'Positive Brand Association',
+        copy: 'Align with a community-first event built around collaboration, creativity and mutual support.',
+      },
+      {
+        number: '4',
+        title: 'Live Mentions & Stage Access',
+        copy: 'Exclusive stage time by tier, plus live mentions across sessions, workshops and panels.',
+      },
+      {
+        number: '5',
+        title: 'Organic Creator Content',
+        copy: 'Sponsor-briefed challenges generate real user-generated content, not paid placements.',
+      },
+      {
+        number: '6',
+        title: 'Direct Creator Access',
+        copy: 'Engage directly with 30\u201350+ creators per property \u2014 the people shaping regional culture online.',
+      },
+    ],
+  },
+
+  properties: {
+    eyebrow: 'SPONSORSHIP STRATEGY',
+    title: 'Multiple Ownable Properties, Not One Title',
+    intro:
+      'Instead of selling a single title sponsorship, the Creator Season is built as a portfolio of ownable properties \u2014 giving brands the choice to own a single activity or a slice of the entire season.',
+    items: [
+      { number: '01', title: 'Photography Championship' },
+      { number: '02', title: 'Film Festival' },
+      { number: '03', title: 'Reel League' },
+      { number: '04', title: 'AI Challenge' },
+      { number: '05', title: 'Performing Arts Stage' },
+      { number: '06', title: 'Art Battle & Exhibition' },
+      { number: '07', title: 'Photo Walk Series' },
+      { number: '08', title: 'Podcast Studio' },
+      { number: '09', title: 'Creator Marketplace' },
+      { number: '10', title: 'Awards Night' },
+      { number: '11', title: 'Networking Lounge' },
+      { number: '12', title: 'Brand Experience Zone' },
+      { number: '13', title: 'Collaboration Zone' },
+      { number: '14', title: 'Tech Experience Zone' },
+      { number: '15', title: 'Memory Creation Zone' },
+      { number: '16', title: 'Marketing Zone' },
+    ],
+    note: 'Brands can own an individual property outright, or step in at Title, Powered By, Associate or Category Partner level across the whole season.',
+  },
+
+  tiers: {
+    eyebrow: 'THE OFFER',
+    title: 'Sponsorship Tiers',
+    target: '\u20b955,00,000',
+    rows: [
+      { number: '01', tier: 'Title Sponsor', investment: '\u20b915,00,000', unit: 'each', availability: '1' },
+      { number: '02', tier: 'Powered By Sponsor', investment: '\u20b910,00,000', unit: 'each', availability: '1' },
+      { number: '03', tier: 'Co-Powered By Sponsor', investment: '\u20b97,00,000', unit: 'each', availability: '1' },
+      { number: '04', tier: 'Associate Sponsor', investment: '\u20b95,00,000', unit: 'each', availability: '2' },
+      { number: '05', tier: 'Category Partner', investment: '\u20b91,00,000', unit: 'each', availability: '6' },
+      { number: '06', tier: 'Zone Partner', investment: '\u20b960,000', unit: 'each', availability: '5' },
+      { number: '07', tier: 'Activity Partner', investment: '\u20b950,000', unit: 'each', availability: '8' },
+      { number: '08', tier: 'Community Supporter', investment: '\u20b950,000', unit: 'each', availability: 'Unlimited' },
+    ],
+    note: 'Choose one property \u2014 or own the entire Creator Season.',
+  },
+
+  tierDetails: [
+    {
+      tier: 'TIER 01 \u2014 EXCLUSIVE',
+      title: 'Title Sponsor',
+      investment: '\u20b915,00,000 each',
+      availability: '1 only',
+      groups: [
+        {
+          heading: 'Naming & Deliverables',
+          items: [
+            'Official naming rights \u2014 "[Your Brand] presents Bhopal Creator Summit 2026"',
+            'Top-tier logo on main stage, entry arch, ID cards & all event materials',
+            'Opening/closing ceremony speaking slot for a brand representative',
+            'Prominent brand experience booth at the finale venue',
+          ],
+        },
+        {
+          heading: 'Media, Season & Extras',
+          items: [
+            'Title billing across all 30 days \u2014 launch, challenges & finale content',
+            'Title logo in recap film, teaser reels & all press coverage',
+            'Custom co-branded reels on official + partner creator handles',
+            'One-on-one creator meet slot, brand video screening & custom QR placements',
+            'Dedicated 20 VIP sitting area (Pre + During + Post Event)',
+            'Full-scale social media promotion (Pre + During + Post Event)',
+            'Opportunity to address the audience on stage',
+            'Top visibility in YouTube full event video',
+            'Featured in press releases & media coverage',
+            'Co-branded stage backdrop & media wall',
+          ],
+        },
+      ],
+    },
+    {
+      tier: 'TIER 02 \u2014 EXCLUSIVE',
+      title: 'Powered By Sponsor',
+      subtitle: 'High impact visibility with strong brand recall',
+      investment: '\u20b910,00,000 each',
+      availability: '1 only',
+      groups: [
+        {
+          heading: 'Benefits',
+          items: [
+            'Second-highest logo visibility across event creatives',
+            'Branding across key venue touchpoints (stage sides, standees, banners)',
+            'Presence in selected outdoor branding in the city',
+            'Premium stall space in prime visitor zone',
+            'Multiple social media promotions & brand mentions',
+            'On-stage acknowledgements during key moments',
+            'Logo inclusion in official YouTube event video',
+            'Dedicated 15 VIP sitting area',
+            'Opportunity for brand activations / engagement',
+            'Inclusion in digital marketing campaigns',
+            'Featured in limited media coverage mention',
+          ],
+        },
+      ],
+    },
+    {
+      tier: 'TIER 03 \u2014 EXCLUSIVE',
+      title: 'Co-Sponsor',
+      subtitle: 'Strong brand presence & community connect',
+      investment: '\u20b97,00,000 each',
+      availability: 'Limited',
+      groups: [
+        {
+          heading: 'Benefits',
+          items: [
+            'Small-sized logo placement across promotional creatives',
+            'Branding at entry points & common areas',
+            'Presence in digital promotions & social media campaigns',
+            'Dedicated 5 sitting in VIP area',
+            'Stage mentions (selective) during event',
+            'Space for standee / kiosk setup',
+          ],
+        },
+      ],
+    },
+    {
+      tier: 'TIER 04 \u2014 PREMIUM PARTNER',
+      title: 'Associate Sponsor',
+      subtitle: 'Supportive brand presence & community visibility',
+      investment: '\u20b95,00,000 each',
+      availability: '2 only',
+      groups: [
+        {
+          heading: 'Benefits',
+          items: [
+            'Logo placement on selected event creatives',
+            'Branding across shared venue spaces',
+            '1\u20132 social media mentions',
+            'Dedicated 10 VIP sitting area',
+            'Logo inclusion in YouTube end credits',
+            'Limited on-stage mentions during the event',
+          ],
+        },
+      ],
+    },
+  ],
+
+  partnershipTiers: {
+    eyebrow: 'PARTNER WITH IMPACT',
+    title: 'Partnership Tiers & Benefits',
+    intro: 'Choose the right partnership. Maximize your brand impact.',
+    highlights: ['Maximum Visibility', 'Creator Connect', 'Brand Growth', 'Business Impact'],
+    rows: [
+      {
+        tier: 'Category Partner',
+        investment: '\u20b91,00,000 each',
+        benefits: [
+          'Logo on all relevant event creatives in your category',
+          'On-stage category partner acknowledgement',
+          'Branding at category specific zones & backdrops',
+          'Digital promotions & social media mentions',
+        ],
+      },
+      {
+        tier: 'Zone Partner',
+        investment: '\u20b960,000 each',
+        benefits: [
+          'Branding in a specific zone at the venue',
+          'Logo on zone signage & directional branding',
+          'Digital promotions & social media mentions',
+          'Opportunity for on-ground brand visibility',
+        ],
+      },
+      {
+        tier: 'Activity Partner',
+        investment: '\u20b950,000 each',
+        benefits: [
+          'Logo on activity-specific promotions',
+          'Branding at activity area',
+          'Announcements during activity sessions',
+          'Social media mentions',
+        ],
+      },
+      {
+        tier: 'Community Supporter',
+        investment: '\u20b950,000 each',
+        benefits: [
+          'Logo on select event creatives',
+          'Logo on website & digital thank you page',
+          'Social media mention',
+          'Certificate of appreciation',
+        ],
+      },
+    ],
+    why: {
+      title: 'Why Partner With Us?',
+      copy: "Be part of Central India's biggest creator movement that connects brands with millions of engaged audiences.",
+      stats: [
+        { value: '50M+', label: 'Digital Reach' },
+        { value: '1000+', label: 'Creators' },
+        { value: '30 DAYS', label: 'Creator Carnival' },
+        { value: 'MAXIMUM', label: 'Brand Visibility' },
+      ],
+    },
+  },
+
+  cta: {
+    eyebrow: 'JOIN US',
+    title: 'Partner With Us for Creator Season 2026',
+    copy: "The Bhopal Creator Summit is more than an event \u2014 it's a celebration of creativity, collaboration and community. Partner with us for Creator Season 2026 and put your brand at the centre of Central India's largest creator ecosystem.",
+    phones: ['+91 7974579553', '+91 8871663113'],
+  },
+};
