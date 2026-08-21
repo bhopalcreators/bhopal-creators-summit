@@ -8,11 +8,14 @@ import SponsorshipPage from './pages/SponsorshipPage';
 import AboutPage from './pages/AboutPage';
 import PreviousYearPage from './pages/PreviousYearPage';
 import CompetitionPage from './pages/CompetitionPage';
-import Register from './pages/Register';
-import Login from './pages/Login';
-import MyAccount from './pages/MyAccount';
 import AdminApp from './admin/AdminApp';
-import { AccountProvider } from './context/AccountContext';
+// Login/Register/MyAccount routes are temporarily disabled on the frontend
+// (not deleted — pages, context, and API routes are all still intact for
+// when we need to switch them back on).
+// import Register from './pages/Register';
+// import Login from './pages/Login';
+// import MyAccount from './pages/MyAccount';
+// import { AccountProvider } from './context/AccountContext';
 
 function ScrollToHash() {
   const { hash, pathname } = useLocation();
@@ -35,26 +38,22 @@ function ScrollToHash() {
 
 function PublicSite() {
   return (
-    <AccountProvider>
-      <div className="min-h-screen bg-ink">
-        <Navbar />
-        <ScrollToHash />
-        <main>
-          <Routes>
-            <Route path="/" element={<Home />} />
-            <Route path="/2025" element={<Home2025 />} />
-            <Route path="/partner-with-us" element={<SponsorshipPage />} />
-            <Route path="/about" element={<AboutPage />} />
-            <Route path="/previous-years/:slug" element={<PreviousYearPage />} />
-            <Route path="/competitions/:slug" element={<CompetitionPage />} />
-            <Route path="/register" element={<Register />} />
-            <Route path="/login" element={<Login />} />
-            <Route path="/my-account" element={<MyAccount />} />
-          </Routes>
-        </main>
-        <Footer />
-      </div>
-    </AccountProvider>
+    <div className="min-h-screen bg-ink">
+      <Navbar />
+      <ScrollToHash />
+      <main>
+        <Routes>
+          <Route path="/" element={<Home />} />
+          <Route path="/2025" element={<Home2025 />} />
+          <Route path="/partner-with-us" element={<SponsorshipPage />} />
+          <Route path="/about" element={<AboutPage />} />
+          <Route path="/previous-years/:slug" element={<PreviousYearPage />} />
+          <Route path="/competitions/:slug" element={<CompetitionPage />} />
+          {/* Register/Login/MyAccount routes disabled for now — see imports above */}
+        </Routes>
+      </main>
+      <Footer />
+    </div>
   );
 }
 

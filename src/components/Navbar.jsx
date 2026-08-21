@@ -1,13 +1,15 @@
 import { useEffect, useState } from 'react';
 import { Link, useLocation } from 'react-router-dom';
-import { Menu, X, ShoppingBag, User } from 'lucide-react';
+import { Menu, X } from 'lucide-react';
 import {
   navLinks as navLinksFallback,
   navLinks2025 as navLinks2025Fallback,
   siteSettings,
   siteSettings2026,
 } from '../data/siteContent';
-import { useAccount } from '../context/AccountContext';
+// Login/Register (and useAccount) are temporarily disabled on the frontend —
+// see App.jsx for the note. Not deleted, just not wired up for now.
+// import { useAccount } from '../context/AccountContext';
 import useApiContent from '../hooks/useApiContent';
 
 function NavAnchor({ href, basePath, className, onClick, children }) {
@@ -37,7 +39,6 @@ function NavAnchor({ href, basePath, className, onClick, children }) {
 export default function Navbar() {
   const [scrolled, setScrolled] = useState(false);
   const [open, setOpen] = useState(false);
-  const { attendee } = useAccount();
   const location = useLocation();
   const isLegacy2025 = location.pathname === '/2025' || location.pathname.startsWith('/2025/');
   const basePath = isLegacy2025 ? '/2025' : '/';
@@ -88,16 +89,7 @@ export default function Navbar() {
         </nav>
 
         <div className="hidden items-center gap-6 lg:flex">
-          <a href="#cart" className="focus-flare relative text-bone hover:text-flare" aria-label="Cart">
-            <ShoppingBag size={20} />
-            <span className="absolute -right-2 -top-2 flex h-4 w-4 items-center justify-center rounded-full bg-flare text-[10px] font-bold text-ink">
-              0
-            </span>
-          </a>
-          <Link to="/my-account" className="focus-flare flex items-center gap-2 text-sm font-semibold text-bone hover:text-flare">
-            <User size={16} />
-            {attendee ? attendee.name.split(' ')[0] : 'Login / Register'}
-          </Link>
+          {/* Cart and Login/Register links disabled for now — see App.jsx note */}
         </div>
 
         <button
@@ -124,13 +116,7 @@ export default function Navbar() {
                 {link.label}
               </NavAnchor>
             ))}
-            <Link
-              to="/my-account"
-              onClick={() => setOpen(false)}
-              className="focus-flare mt-2 rounded-md px-2 py-3 text-base font-semibold text-bone hover:bg-panel hover:text-flare"
-            >
-              {attendee ? attendee.name.split(' ')[0] : 'Login / Register'}
-            </Link>
+            {/* Login/Register link disabled for now — see App.jsx note */}
           </nav>
         </div>
       )}

@@ -1,5 +1,4 @@
 import { motion } from 'framer-motion';
-import { Link } from 'react-router-dom';
 import Button from './Button';
 import { siteSettings2026 } from '../data/siteContent';
 
@@ -71,9 +70,6 @@ export default function Hero2026() {
           transition={{ duration: 0.6, delay: 0.2 }}
           className="mt-10 flex flex-wrap gap-3"
         >
-          <Button as={Link} to="/register" variant="flare">
-            Register
-          </Button>
           <Button
             href={settings.volunteerFormUrl || '#contact'}
             target={settings.volunteerFormUrl ? '_blank' : undefined}
