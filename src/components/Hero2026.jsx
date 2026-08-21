@@ -11,28 +11,23 @@ export default function Hero2026() {
 
   return (
     <section className="relative flex min-h-screen items-end overflow-hidden bg-ink pt-24">
-      {/* No footage yet for 2026 — ambient gradient background instead of the hero video */}
+      {/* Background video — same footage as the 2025 hero, reused until 2026-specific footage exists */}
+      <video
+        className="absolute inset-0 h-full w-full object-cover"
+        src="/hero-video.mp4"
+        autoPlay
+        muted
+        loop
+        playsInline
+        poster="/favicon.svg"
+      />
+
+      {/* Dark overlay so the text/buttons stay legible over any footage */}
       <div
         aria-hidden
-        className="pointer-events-none absolute inset-0"
-        style={{
-          background:
-            'radial-gradient(circle at 20% 20%, rgba(255,90,31,0.16), transparent 55%), radial-gradient(circle at 80% 0%, rgba(233,75,140,0.12), transparent 50%), var(--color-ink)',
-        }}
+        className="pointer-events-none absolute inset-0 bg-gradient-to-t from-ink via-ink/40 to-ink/10"
       />
-      <div
-        aria-hidden
-        className="pointer-events-none absolute inset-0 opacity-[0.06]"
-        style={{
-          backgroundImage:
-            'linear-gradient(var(--color-bone) 1px, transparent 1px), linear-gradient(90deg, var(--color-bone) 1px, transparent 1px)',
-          backgroundSize: '48px 48px',
-        }}
-      />
-      <div
-        aria-hidden
-        className="pointer-events-none absolute inset-0 bg-gradient-to-t from-ink via-ink/30 to-transparent"
-      />
+      <div aria-hidden className="pointer-events-none absolute inset-0 bg-ink/20" />
 
       <div className="relative z-10 mx-auto w-full max-w-7xl px-5 pb-16 sm:px-8 lg:pb-24">
         <motion.div
