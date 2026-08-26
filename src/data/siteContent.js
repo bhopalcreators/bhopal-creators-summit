@@ -27,6 +27,8 @@ export const navLinks = [
   { label: 'Our Journey', href: '#journey' },
   { label: 'Season', href: '#season' },
   { label: 'Challenges', href: '#challenges' },
+  { label: 'Competitions', href: '#competitions-2026' },
+  { label: 'Activities', href: '#activities-2026' },
   { label: 'Community', href: '#community' },
   { label: 'Awards', href: '#awards' },
   { label: 'Partner With Us', href: '/partner-with-us' },
@@ -487,6 +489,80 @@ export const challengeCategories2026 = {
   ],
   note: 'Every category \u2014 electronic or non-electronic \u2014 is a sponsorable Category Partner property.',
 };
+
+// Live-and-open 2026 competitions & activities (workshops for 2026 haven't
+// been announced yet, so workshops2026 stays empty for now — the section
+// just won't render on the live site until items exist, see Workshops2026.jsx).
+// These fallbacks mirror the shape returned by GET /competitions?year=2026,
+// GET /activities?year=2026 and GET /workshops?year=2026 respectively.
+export const competitions2026 = [
+  {
+    slug: 'dance-battle-2026',
+    title: 'Dance Battle',
+    shortDescription: 'Bring your best moves and battle it out on stage \u2014 solo or crew, your call.',
+    icon: 'dance',
+  },
+  {
+    slug: 'food-vlogger-2026',
+    title: 'Food Vlogger Competition',
+    shortDescription: 'Camera in one hand, plate in the other \u2014 show us how Bhopal eats.',
+    icon: 'food',
+  },
+  {
+    slug: 'gaming-2026',
+    title: 'Gaming',
+    shortDescription: 'Squad up and battle it out \u2014 bragging rights and prizes on the line.',
+    icon: 'gaming',
+  },
+  {
+    slug: 'photography-2026',
+    title: 'Photography',
+    shortDescription: 'Your city, your frame, your story \u2014 capture Bhopal like only you can.',
+    icon: 'photography',
+  },
+  {
+    slug: 'documentary-film-2026',
+    title: 'Documentary Film',
+    shortDescription: 'Short, sharp and real \u2014 tell a true story that needs to be seen.',
+    icon: 'documentary',
+  },
+  {
+    slug: 'treasure-hunt-2026',
+    title: 'Treasure Hunt',
+    shortDescription: 'Clues, chaos and creators \u2014 race across the city to crack it first.',
+    icon: 'treasure',
+  },
+  {
+    slug: 'ai-creator-2026',
+    title: 'AI Creator',
+    shortDescription: 'Prompt it, generate it, own it \u2014 show us what AI-powered creativity looks like.',
+    icon: 'ai',
+  },
+];
+
+export const activities2026 = [
+  { title: 'Bike Rally', copy: 'Kick off the season on two wheels \u2014 creators riding together through the city.' },
+  { title: 'Jamming', copy: 'Open mic, open strings \u2014 creators jamming together, no script needed.' },
+  { title: 'Painting Competition / Wall Art', copy: 'Blank walls, bold colours \u2014 live painting that turns the venue into a canvas.' },
+  { title: 'Cleanliness Drive', copy: 'Creators giving back \u2014 a community clean-up with content that actually matters.' },
+  { title: 'Sports', copy: 'Friendly matches, real competition \u2014 creators trade cameras for jerseys for a day.' },
+  { title: 'Shayari', hostedBy: 'Raghav Singh', copy: 'An evening of verses and vibe, hosted by Raghav Singh.' },
+  { title: 'Rap Battle', copy: 'Bars for bars \u2014 an open rap battle for the boldest voices in the room.' },
+  { title: 'Fitness', copy: 'Sweat it out together \u2014 a high-energy fitness session to start the day right.' },
+  { title: 'Plantation Drive', copy: 'Creators planting more than content \u2014 a green initiative for the city.' },
+  { title: 'Fashion', hostedBy: 'Tapti Thakur', copy: 'A styled walk curated by Tapti Thakur, showcasing Bhopal\u2019s fashion-forward creators.' },
+  { title: 'Gen Run', copy: 'A community run for every generation of creators \u2014 pace optional, energy mandatory.' },
+  { title: 'Well-being', copy: 'Slow down for a bit \u2014 sessions on mindfulness and staying sane in the content grind.' },
+  { title: 'Traffic Police', copy: 'A collaboration with Bhopal Traffic Police on road safety awareness, creator-style.' },
+  { title: 'Singing', copy: 'Open floor, open mic \u2014 creators showing off their vocal side.' },
+  { title: 'Photowalk', copy: 'A guided walk through Bhopal\u2019s most photogenic corners, camera in hand.' },
+  { title: 'Flash Mob', copy: 'Unscripted, unexpected \u2014 a flash mob to keep the energy unpredictable.' },
+];
+
+// Empty on purpose \u2014 2026 workshops haven't been announced. Workshops2026.jsx
+// renders nothing when there's no data, so this just keeps the section hidden
+// until real workshops are added from the admin panel.
+export const workshops2026 = [];
 
 export const communityEngagement2026 = {
   eyebrow: 'PHASE 03 \u2014 DAYS 5\u201328',

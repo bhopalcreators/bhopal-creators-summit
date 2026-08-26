@@ -4,6 +4,9 @@ import Stats2026 from '../components/Stats2026';
 import BigIdea2026 from '../components/BigIdea2026';
 import SeasonStructure2026 from '../components/SeasonStructure2026';
 import ChallengeCategories2026 from '../components/ChallengeCategories2026';
+import Competitions2026 from '../components/Competitions2026';
+import Activities2026 from '../components/Activities2026';
+import Workshops2026 from '../components/Workshops2026';
 import CommunityEngagement2026 from '../components/CommunityEngagement2026';
 import GrandFinale2026 from '../components/GrandFinale2026';
 import SignatureExperiences2026 from '../components/SignatureExperiences2026';
@@ -29,6 +32,9 @@ export default function Home() {
       <BigIdea2026 />
       <SeasonStructure2026 />
       <ChallengeCategories2026 />
+      <Competitions2026 />
+      <Activities2026 />
+      <Workshops2026 />
       <CommunityEngagement2026 />
       <GrandFinale2026 />
       <SignatureExperiences2026 />
