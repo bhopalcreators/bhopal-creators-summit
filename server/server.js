@@ -15,7 +15,24 @@ const PORT = process.env.PORT || 5000;
 
 const allowedOrigins = (process.env.CORS_ORIGINS || 'http://localhost:5173')
   .split(',')
-  .map((o) => o.trim());
+  .map((o) => o.trim())
+  .filter(Boolean)
+  .flatMap((origin) => {
+    // Also allow the www./non-www. counterpart of each configured origin,
+    // so a mismatch between the env var and the actual site host doesn't
+    // silently break CORS (e.g. CORS_ORIGINS set without "www." while the
+    // site is served from "https://www.<domain>").
+    try {
+      const url = new URL(origin);
+      const altHost = url.hostname.startsWith('www.')
+        ? url.hostname.slice(4)
+        : `www.${url.hostname}`;
+      const altOrigin = `${url.protocol}//${altHost}${url.port ? `:${url.port}` : ''}`;
+      return [origin, altOrigin];
+    } catch {
+      return [origin];
+    }
+  });
 
 app.use(
   helmet({
