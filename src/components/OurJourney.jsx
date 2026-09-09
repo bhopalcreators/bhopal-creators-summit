@@ -2,7 +2,7 @@ import { ArrowRight, Sparkles } from 'lucide-react';
 import { Link } from 'react-router-dom';
 import SectionHeading from './SectionHeading';
 import useApiContent from '../hooks/useApiContent';
-import { journeyStats as journeyStatsFallback, previousYearsFallback } from '../data/siteContent';
+import { journeyStats as journeyStatsFallback, previousYearsFallback, siteSettings2026 } from '../data/siteContent';
 
 export default function OurJourney() {
   const { data: years } = useApiContent('/previous-years?limit=50', previousYearsFallback);
@@ -77,22 +77,24 @@ export default function OurJourney() {
             );
           })}
 
-          {/* 2026 teaser tile */}
+          {/* 2026 tile — the next chapter, and tickets for it are already live */}
           <a
-            href="#coming-soon-2026"
+            href={siteSettings2026.ticketUrl}
+            target="_blank"
+            rel="noreferrer"
             className="focus-flare group flex h-full flex-col justify-between rounded-2xl border border-flare/40 bg-gradient-to-br from-panel to-charcoal p-6 transition-colors hover:border-flare"
           >
             <div>
               <p className="flex items-center gap-1.5 font-mono text-xs uppercase tracking-[0.25em] text-marigold">
-                <Sparkles size={13} /> Coming Soon
+                <Sparkles size={13} /> Now Booking
               </p>
               <p className="mt-2 font-display text-4xl text-bone group-hover:text-flare">2026</p>
               <p className="mt-3 text-sm leading-relaxed text-fog">
-                The next chapter of the Summit is on its way. Passes drop soon.
+                The next chapter of the Summit is on its way &mdash; and tickets are already open.
               </p>
             </div>
             <span className="mt-6 inline-flex items-center gap-1.5 text-xs font-bold uppercase tracking-wide text-marigold">
-              Get Notified <ArrowRight size={14} />
+              Get Your Tickets <ArrowRight size={14} />
             </span>
           </a>
         </div>

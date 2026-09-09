@@ -1,4 +1,6 @@
-import { creatorAwards2026 } from '../data/siteContent';
+import { Ticket } from 'lucide-react';
+import Button from './Button';
+import { creatorAwards2026, siteSettings2026 } from '../data/siteContent';
 
 export default function CreatorAwards2026() {
   const a = creatorAwards2026;
@@ -20,6 +22,13 @@ export default function CreatorAwards2026() {
               {cat}
             </div>
           ))}
+        </div>
+
+        <div className="mt-10 text-center">
+          <Button href={siteSettings2026.ticketUrl} target="_blank" rel="noreferrer" variant="flare" className="gap-2">
+            <Ticket size={16} />
+            Get Your Tickets to the Awards
+          </Button>
         </div>
       </div>
     </section>

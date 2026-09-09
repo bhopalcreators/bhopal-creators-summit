@@ -392,6 +392,10 @@ export const siteSettings2026 = {
   dateFull: 'To Be Announced',
   venue: 'VENUE',
   venueFull: 'To Be Announced',
+  // Live ticketing link for the 2026 edition (eventman.live). Centralised here
+  // so every 2026 CTA — navbar, hero, coming-soon, section CTAs, floating
+  // button — points at the same place and only needs updating in one spot.
+  ticketUrl: 'https://qr.eventman.live/event/6a884051c58033bcd9e2a8dd',
 };
 
 export const aboutContent2026 = {

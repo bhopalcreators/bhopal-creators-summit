@@ -1,4 +1,6 @@
-import { grandFinale2026 } from '../data/siteContent';
+import { Ticket } from 'lucide-react';
+import Button from './Button';
+import { grandFinale2026, siteSettings2026 } from '../data/siteContent';
 
 export default function GrandFinale2026() {
   const g = grandFinale2026;
@@ -18,6 +20,14 @@ export default function GrandFinale2026() {
               {item}
             </div>
           ))}
+        </div>
+
+        <div className="mt-10 flex flex-col items-start gap-3 sm:flex-row sm:items-center">
+          <p className="text-sm text-fog">Don&rsquo;t watch the finale from the outside.</p>
+          <Button href={siteSettings2026.ticketUrl} target="_blank" rel="noreferrer" variant="flare" className="gap-2">
+            <Ticket size={16} />
+            Get Your Tickets
+          </Button>
         </div>
       </div>
     </section>

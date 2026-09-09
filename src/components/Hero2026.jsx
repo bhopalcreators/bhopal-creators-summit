@@ -1,4 +1,5 @@
 import { motion } from 'framer-motion';
+import { Ticket } from 'lucide-react';
 import Button from './Button';
 import { siteSettings2026 } from '../data/siteContent';
 
@@ -65,6 +66,10 @@ export default function Hero2026() {
           transition={{ duration: 0.6, delay: 0.2 }}
           className="mt-10 flex flex-wrap gap-3"
         >
+          <Button href={settings.ticketUrl} target="_blank" rel="noreferrer" variant="flare" className="gap-2">
+            <Ticket size={17} />
+            Get Tickets
+          </Button>
           <Button
             href={settings.volunteerFormUrl || '#contact'}
             target={settings.volunteerFormUrl ? '_blank' : undefined}

@@ -1,13 +1,13 @@
 const logos = [
   { name: 'Canon', logo: { url: '/past-collaborations/canon.png' } },
-  { name: 'Snapchat', logo: { url: '/past-collaborations/snapchat.png' } },
+  { name: 'Snapchat', logo: { url: '/past-collaborations/snapchat.jpg' } },
   { name: 'IndiGo', logo: { url: '/past-collaborations/indigo.png' } },
   { name: 'Madhya Pradesh Tourism', logo: { url: '/past-collaborations/mp-tourism.png' } },
-  { name: 'Pandav Hotels', logo: { url: '/past-collaborations/pandav-hotels.png' } },
+  { name: 'Pandav Hotels', logo: { url: '/past-collaborations/pandav-hotels.jpg' } },
   { name: 'OM System', logo: { url: '/past-collaborations/om-system.png' } },
   { name: 'Lucia', logo: { url: '/past-collaborations/lucia.png' } },
-  { name: 'BNI Bhopal', logo: { url: '/past-collaborations/bni-bhopal.png' } },
-  { name: 'SAM Global University', logo: { url: '/past-collaborations/sam-global-university.png' } },
+  { name: 'BNI Bhopal', logo: { url: '/past-collaborations/bni-bhopal.jpg' } },
+  { name: 'SAM Global University', logo: { url: '/past-collaborations/sam-global-university.jpg' } },
 ];
 
 function LogoCard({ s }) {

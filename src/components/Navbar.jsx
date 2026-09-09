@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react';
 import { Link, useLocation } from 'react-router-dom';
-import { Menu, X } from 'lucide-react';
+import { Menu, Ticket, X } from 'lucide-react';
+import Button from './Button';
 import {
   navLinks as navLinksFallback,
   navLinks2025 as navLinks2025Fallback,
@@ -42,6 +43,9 @@ export default function Navbar() {
   const location = useLocation();
   const isLegacy2025 = location.pathname === '/2025' || location.pathname.startsWith('/2025/');
   const basePath = isLegacy2025 ? '/2025' : '/';
+  // "Get Tickets" only makes sense on the live 2026 homepage — the 2025 page
+  // is an archive of a past, sold-out edition.
+  const isHome2026 = location.pathname === '/';
 
   // Nav links are fixed in code on both pages (not CMS-driven). The live
   // /settings API can hold a stale navLinks array from before the 2026
@@ -75,25 +79,37 @@ export default function Navbar() {
           />
         </Link>
 
-        <nav className="hidden items-center gap-9 lg:flex">
+        <nav className="hidden items-center gap-5 xl:flex">
           {navLinks.map((link) => (
             <NavAnchor
               key={link.label}
               href={link.href}
               basePath={basePath}
-              className="focus-flare text-sm font-semibold text-bone/90 transition-colors hover:text-flare"
+              className="focus-flare whitespace-nowrap text-sm font-semibold text-bone/90 transition-colors hover:text-flare"
             >
               {link.label}
             </NavAnchor>
           ))}
         </nav>
 
-        <div className="hidden items-center gap-6 lg:flex">
+        <div className="hidden items-center gap-6 xl:flex">
           {/* Cart and Login/Register links disabled for now — see App.jsx note */}
+          {isHome2026 && (
+            <Button
+              href={siteSettings2026.ticketUrl}
+              target="_blank"
+              rel="noreferrer"
+              variant="flare"
+              className="shrink-0 gap-2 whitespace-nowrap !px-5 !py-2.5 text-xs"
+            >
+              <Ticket size={15} />
+              Get Tickets
+            </Button>
+          )}
         </div>
 
         <button
-          className="focus-flare text-bone lg:hidden"
+          className="focus-flare text-bone xl:hidden"
           onClick={() => setOpen((v) => !v)}
           aria-label={open ? 'Close menu' : 'Open menu'}
           aria-expanded={open}
@@ -103,7 +119,7 @@ export default function Navbar() {
       </div>
 
       {open && (
-        <div className="border-t border-panel-line bg-ink px-5 pb-6 pt-2 lg:hidden">
+        <div className="border-t border-panel-line bg-ink px-5 pb-6 pt-2 xl:hidden">
           <nav className="flex flex-col gap-1">
             {navLinks.map((link) => (
               <NavAnchor
@@ -117,6 +133,19 @@ export default function Navbar() {
               </NavAnchor>
             ))}
             {/* Login/Register link disabled for now — see App.jsx note */}
+            {isHome2026 && (
+              <Button
+                href={siteSettings2026.ticketUrl}
+                target="_blank"
+                rel="noreferrer"
+                variant="flare"
+                onClick={() => setOpen(false)}
+                className="mt-3 gap-2"
+              >
+                <Ticket size={16} />
+                Get Tickets
+              </Button>
+            )}
           </nav>
         </div>
       )}

@@ -1,7 +1,7 @@
 import { useRef } from 'react';
 import { Camera, UtensilsCrossed, Gamepad2, Film, Compass, Bot, Music2, ChevronLeft, ChevronRight } from 'lucide-react';
 import Button from './Button';
-import { competitions2026 as fallbackCompetitions2026 } from '../data/siteContent';
+import { competitions2026 as fallbackCompetitions2026, siteSettings2026 } from '../data/siteContent';
 import useApiContent from '../hooks/useApiContent';
 
 const iconBySlug = {
@@ -68,7 +68,7 @@ export default function Competitions2026() {
               return (
                 <article
                   key={c._id || c.slug}
-                  className="flex w-[280px] shrink-0 snap-start flex-col"
+                  className="flex h-auto w-[280px] shrink-0 snap-start flex-col"
                 >
                   <div className="flex aspect-square items-center justify-center overflow-hidden rounded-2xl bg-gradient-to-br from-panel to-charcoal">
                     {c.coverImage?.url ? (
@@ -81,17 +81,24 @@ export default function Competitions2026() {
                       <Icon size={52} strokeWidth={1} className="text-fog" />
                     )}
                   </div>
-                  <h3 className="mt-6 font-display text-2xl uppercase text-bone">{c.title}</h3>
-                  <p className="mt-2 text-sm leading-relaxed text-fog">{c.copy || c.shortDescription}</p>
-                  {c.registerUrl ? (
-                    <Button href={c.registerUrl} target="_blank" rel="noreferrer" className="mt-6 self-start">
-                      Register Now
-                    </Button>
-                  ) : (
-                    <Button href={`/competitions/${c.slug}`} className="mt-6 self-start">
-                      View Details
-                    </Button>
-                  )}
+                  <div className="flex flex-1 flex-col">
+                    <h3 className="mt-6 font-display text-2xl uppercase text-bone">{c.title}</h3>
+                    <p className="mt-2 line-clamp-3 text-sm leading-relaxed text-fog">
+                      {c.copy || c.shortDescription}
+                    </p>
+                  </div>
+                  {/* Every competition registers through the same live event
+                      ticket link — no standalone /competitions/:slug page
+                      needed. A competition can still override with its own
+                      registerUrl if one is ever set from the admin panel. */}
+                  <Button
+                    href={c.registerUrl || siteSettings2026.ticketUrl}
+                    target="_blank"
+                    rel="noreferrer"
+                    className="mt-6 self-start"
+                  >
+                    Register Now
+                  </Button>
                 </article>
               );
             })}

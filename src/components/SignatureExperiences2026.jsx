@@ -1,4 +1,6 @@
-import { signatureExperiences2026 } from '../data/siteContent';
+import { Ticket } from 'lucide-react';
+import Button from './Button';
+import { signatureExperiences2026, siteSettings2026 } from '../data/siteContent';
 
 export default function SignatureExperiences2026() {
   const s = signatureExperiences2026;
@@ -16,6 +18,13 @@ export default function SignatureExperiences2026() {
               <h3 className="mt-2 font-display text-base uppercase leading-tight text-bone">{item.title}</h3>
             </div>
           ))}
+        </div>
+
+        <div className="mt-10 flex justify-center">
+          <Button href={siteSettings2026.ticketUrl} target="_blank" rel="noreferrer" variant="outline" className="gap-2">
+            <Ticket size={16} />
+            Secure Your Spot
+          </Button>
         </div>
       </div>
     </section>

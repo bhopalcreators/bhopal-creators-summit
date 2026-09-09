@@ -1,6 +1,6 @@
-import { Sparkles } from 'lucide-react';
+import { Sparkles, Ticket } from 'lucide-react';
 import Button from './Button';
-import { comingSoon2026 as comingSoonFallback } from '../data/siteContent';
+import { comingSoon2026 as comingSoonFallback, siteSettings2026 } from '../data/siteContent';
 import useApiContent from '../hooks/useApiContent';
 
 export default function ComingSoon2026() {
@@ -31,11 +31,18 @@ export default function ComingSoon2026() {
         <p className="mx-auto mt-6 max-w-xl leading-relaxed text-fog">{comingSoon2026.copy}</p>
 
         <div className="mt-10 flex flex-wrap items-center justify-center gap-4">
-          <Button href={comingSoon2026.notifyHref} target="_blank" rel="noreferrer" variant="flare">
-            {comingSoon2026.notifyLabel}
+          <Button
+            href={siteSettings2026.ticketUrl}
+            target="_blank"
+            rel="noreferrer"
+            variant="flare"
+            className="gap-2"
+          >
+            <Ticket size={16} />
+            Get Your Tickets
           </Button>
-          <Button href="#tickets" variant="outline">
-            Registration Opens Soon
+          <Button href={comingSoon2026.notifyHref} target="_blank" rel="noreferrer" variant="outline">
+            {comingSoon2026.notifyLabel}
           </Button>
         </div>
       </div>
