@@ -138,6 +138,67 @@ export const sponsors = [
   { name: 'US Media Works' },
 ];
 
+// Fallback logo grid for the "Past Collaborations" panel above the sponsor
+// CTA. Pulls from the same /sponsors admin resource as `sponsors` above, so
+// logos uploaded/reordered from the admin panel show here automatically —
+// this local array only renders until that API call resolves.
+export const pastCollaborationsFallback = [
+  { name: 'Canon', logo: { url: '/past-collaborations/canon.png' } },
+  { name: 'Snapchat', logo: { url: '/past-collaborations/snapchat.png' } },
+  { name: 'IndiGo', logo: { url: '/past-collaborations/indigo.png' } },
+  { name: 'Madhya Pradesh Tourism', logo: { url: '/past-collaborations/mp-tourism.png' } },
+  { name: 'Pandav Hotels', logo: { url: '/past-collaborations/pandav-hotels.png' } },
+  { name: 'OM System', logo: { url: '/past-collaborations/om-system.png' } },
+  { name: 'Lucia', logo: { url: '/past-collaborations/lucia.png' } },
+  { name: 'BNI Bhopal', logo: { url: '/past-collaborations/bni-bhopal.png' } },
+  { name: 'SAM Global University', logo: { url: '/past-collaborations/sam-global-university.png' } },
+];
+
+// Fallback "Our Core & Key Influencers" spotlight cards, shown until
+// /api/influencers is seeded/published from the admin panel.
+export const influencersFallback = [
+  {
+    name: 'Mayank Tiwari',
+    role: 'Founder, Bhopal Creator Community',
+    handle: '',
+    followers: '',
+    bio: "Meet Mayank Tiwari, the Founder of Bhopal Creators Community and one of the key forces behind Bhopal\u2019s growing creator ecosystem. A talented photographer, creator, and community builder, Mayank has dedicated his journey to connecting artists, photographers, filmmakers, influencers, and creative minds under one platform. He is also known for being the first person from India to be featured on Instagram, marking a special milestone in his digital journey. Behind every strong community is someone who believes in its people \u2014 for Bhopal Creators Community, that person is Mayank Tiwari.",
+    photo: { url: '/influencers/mayank-tiwari.png' },
+  },
+  {
+    name: 'Shivansh Choubey',
+    role: 'Organizer, BCS 2026',
+    handle: '@shivanshchoubeyy',
+    followers: '',
+    bio: 'Shivansh Choubey is a singer, event entrepreneur, artist manager, and creative professional working across music, entertainment, events, and creator culture. As the founder of Rambo Entertainments, he has worked across artist management, live performances, event production, brand collaborations, and large-scale entertainment experiences with artists including Vishal Shekhar, Zakir Khan, Mohit Chauhan, Aditya Rikhari, Mika Singh, Farhan Akhtar, and several emerging artists.',
+    photo: { url: '/influencers/shivansh-choubey.png' },
+  },
+  {
+    name: 'Vanshdeep Singh Sisodia',
+    role: 'Content Creator & Travel Photographer',
+    handle: '@1shdeep',
+    followers: '102K Followers',
+    bio: 'From aspiring engineer to a celebrated content creator and travel photographer, Vanshdeep has built a community of 1 lakh+ followers through his passion for storytelling and visual creativity. From collaborations with leading brands to his journey of embracing the challenges behind content creation, he continues to inspire creators to turn their passion into purpose.',
+    photo: { url: '/influencers/vanshdeep-singh-sisodia.png' },
+  },
+  {
+    name: 'Priyansh M. Jain',
+    role: 'Aerial DOP & Travel Photographer',
+    handle: '@shotbypriyansh',
+    followers: '239K Followers',
+    bio: 'A talented aerial DOP, travel photographer, and content creator who has carved a unique identity through cinematic storytelling. From capturing breathtaking landscapes to stories around travel, cars, and lifestyle, his creative vision continues to inspire. With a community of 2 lakh+ followers, Priyansh is one of the emerging visual storytellers from Bhopal making a mark across India.',
+    photo: { url: '/influencers/priyansh-jain.png' },
+  },
+  {
+    name: 'Damini Tripathi',
+    role: 'Digital Marketer & Business Coach',
+    handle: '@damini.creator',
+    followers: '809K Followers',
+    bio: 'Damini Tripathi is one of India\u2019s fastest-growing digital marketers, inspiring thousands with her journey. With 750k+ followers on Instagram and 270K+ subscribers on YouTube, she simplifies digital marketing, making it easy and accessible for everyone. With 6+ years of hands-on experience, Damini has not only coached over 2,000 students but also helped scale multiple businesses from scratch to \u20b91 crore per month in revenue \u2014 be it eCommerce ventures or service-based brands.',
+    photo: { url: '/influencers/damini-tripathi.png' },
+  },
+];
+
 export const competitions = [
   {
     slug: 'photography',

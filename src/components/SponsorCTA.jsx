@@ -1,10 +1,13 @@
 import { Link } from 'react-router-dom';
 import { ArrowUpRight, Handshake } from 'lucide-react';
+import PastCollaborations from './PastCollaborations';
 
 export default function SponsorCTA() {
   return (
-    <section className="bg-ink px-5 py-4 sm:px-8">
+    <section className="bg-ink px-5 pb-4 pt-20 sm:px-8 sm:pt-24">
       <div className="mx-auto max-w-7xl">
+        <PastCollaborations />
+
         <Link
           to="/partner-with-us"
           className="focus-flare group relative flex flex-col items-start gap-6 overflow-hidden rounded-2xl border border-flare/40 bg-gradient-to-br from-panel via-panel to-charcoal p-8 transition-colors hover:border-flare sm:flex-row sm:items-center sm:justify-between sm:p-10"

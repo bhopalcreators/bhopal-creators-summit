@@ -8,6 +8,8 @@ import Competitions2026 from '../components/Competitions2026';
 import Activities2026 from '../components/Activities2026';
 import Workshops2026 from '../components/Workshops2026';
 import CommunityEngagement2026 from '../components/CommunityEngagement2026';
+import InfluencerBoard2026 from '../components/InfluencerBoard2026';
+import KeyInfluencers2026 from '../components/KeyInfluencers2026';
 import GrandFinale2026 from '../components/GrandFinale2026';
 import SignatureExperiences2026 from '../components/SignatureExperiences2026';
 import CreatorAwards2026 from '../components/CreatorAwards2026';
@@ -36,6 +38,8 @@ export default function Home() {
       <Activities2026 />
       <Workshops2026 />
       <CommunityEngagement2026 />
+      <InfluencerBoard2026 />
+      <KeyInfluencers2026 />
       <GrandFinale2026 />
       <SignatureExperiences2026 />
       <CreatorAwards2026 />
