@@ -30,8 +30,8 @@ export default function AdminLayout() {
   };
 
   return (
-    <div className="flex min-h-screen bg-ink">
-      <aside className="hidden w-64 shrink-0 flex-col border-r border-panel-line bg-charcoal lg:flex">
+    <div className="flex h-screen overflow-hidden bg-ink">
+      <aside className="hidden h-full w-64 shrink-0 flex-col overflow-hidden border-r border-panel-line bg-charcoal lg:flex">
         <div className="flex items-center gap-3 border-b border-panel-line px-5 py-5">
           <img
             src="/i-am-a-bhopali-creator-2025.webp"
@@ -45,7 +45,7 @@ export default function AdminLayout() {
           </p>
         </div>
 
-        <nav className="flex-1 overflow-y-auto px-3 py-4">
+        <nav className="admin-scroll flex-1 overflow-y-auto px-3 py-4">
           <ul className="space-y-1">
             {staticLinks.map((link) => (
               <SidebarLink key={link.to} {...link} />
@@ -87,7 +87,7 @@ export default function AdminLayout() {
         </div>
       </aside>
 
-      <main className="flex-1 overflow-y-auto">
+      <main className="admin-scroll flex-1 overflow-y-auto overflow-x-hidden">
         <MobileTopbar can={can} onLogout={handleLogout} />
         <Outlet />
       </main>
