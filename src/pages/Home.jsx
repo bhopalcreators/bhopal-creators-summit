@@ -39,8 +39,8 @@ export default function Home() {
       <Activities2026 />
       <Workshops2026 />
       <CommunityEngagement2026 />
-      <InfluencerBoard2026 />
       <KeyInfluencers2026 />
+      <InfluencerBoard2026 />
       <GrandFinale2026 />
       <SignatureExperiences2026 />
       <CreatorAwards2026 />
